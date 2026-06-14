@@ -1,7 +1,7 @@
 .PHONY: dev down build logs clean validate-data
 
 dev:
-	docker compose up --build
+	docker compose up -d --build
 
 down:
 	docker compose down
