@@ -1,0 +1,1608 @@
+[
+  {
+    "name": "Ancient's Pledge",
+    "runes": ["Ral", "Ort", "Tal"],
+    "types": ["Shields"],
+    "sockets": 3,
+    "requiredLevel": 21,
+    "description": "Ladder-starter shield with strong all-resist bonuses.",
+    "stats": [
+      "+50% Enhanced Defense",
+      "+43% to Cold Resist",
+      "+48% to Fire Resist",
+      "+48% to Lightning Resist",
+      "+48% to Poison Resist",
+      "10% Damage Goes to Mana"
+    ]
+  },
+  {
+    "name": "Anger",
+    "runes": ["Eth", "Tir", "Lo", "Mal"],
+    "types": ["Swords", "Axes"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "High-damage weapon runeword granting ignore target's defense.",
+    "stats": [
+      "75% Enhanced Damage",
+      "+9 to Minimum Damage",
+      "40% Increased Attack Speed",
+      "Ignore Target's Defense",
+      "+75 Poison Damage over 5 Seconds",
+      "7% Life Stolen per Hit",
+      "2 Mana After Each Kill",
+      "Level 18 Venom (12 Charges)"
+    ]
+  },
+  {
+    "name": "Black",
+    "runes": ["Thul", "Io", "Nef"],
+    "types": ["Clubs", "Hammers", "Maces"],
+    "sockets": 3,
+    "requiredLevel": 35,
+    "description": "Cheap crushing blow blunt weapon with knockback.",
+    "stats": [
+      "+120% Enhanced Damage",
+      "+200 to Attack Rating",
+      "Adds 3-14 Cold Damage",
+      "40% Chance of Crushing Blow",
+      "Knockback",
+      "+10 to Vitality",
+      "Magic Damage Reduced by 2",
+      "Level 4 Corpse Explosion (12 Charges)"
+    ]
+  },
+  {
+    "name": "Bone",
+    "runes": ["Sol", "Um", "Um"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 47,
+    "description": "Necromancer armor with skill bonuses and damage reduction.",
+    "stats": [
+      "15% Chance to Cast Level 10 Bone Armor When Struck",
+      "15% Chance to Cast Level 3 Bone Spear on Striking",
+      "+2 to Necromancer Skill Levels",
+      "+100-150 to Mana",
+      "All Resistances +30",
+      "Damage Reduced by 7"
+    ]
+  },
+  {
+    "name": "Bramble",
+    "runes": ["Ral", "Ohm", "Sur", "Eth"],
+    "types": ["Body Armor"],
+    "sockets": 4,
+    "requiredLevel": 61,
+    "description": "Druid Thorns aura armor for reflect builds.",
+    "stats": [
+      "Level 15-21 Thorns Aura When Equipped",
+      "+50% Faster Hit Recovery",
+      "+25-50% to Poison Skill Damage",
+      "+300 Defense",
+      "+Increase Maximum Mana 5%",
+      "Regenerate Mana 15%",
+      "+5% to Maximum Cold Resist",
+      "Fire Resist +30%",
+      "Poison Resist +100%",
+      "+13 Life After Each Kill",
+      "Level 13 Spirit of Barbs (33 Charges)"
+    ]
+  },
+  {
+    "name": "Brand",
+    "runes": ["Jah", "Lo", "Mal", "Gul"],
+    "types": ["Missile Weapons"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "High-damage bow runeword with Amplify Damage proc.",
+    "stats": [
+      "35% Chance to Cast Level 14 Amplify Damage When Struck",
+      "100% Chance to Cast Level 18 Bone Spear on Striking",
+      "+260-340% Enhanced Damage",
+      "Ignore Target's Defense",
+      "+280-330% Damage to Demons",
+      "20% Deadly Strike",
+      "Prevent Monster Heal",
+      "Knockback"
+    ]
+  },
+  {
+    "name": "Breath of the Dying",
+    "runes": ["Vex", "Hel", "El", "Eld", "Zod", "Eth"],
+    "types": ["Weapons"],
+    "sockets": 6,
+    "requiredLevel": 69,
+    "description": "Zod-based indestructible weapon with Poison Nova proc.",
+    "stats": [
+      "50% Chance to Cast Level 20 Poison Nova When You Kill an Enemy",
+      "Indestructible",
+      "+60% Increased Attack Speed",
+      "+350-400% Enhanced Damage",
+      "-25% Target Defense",
+      "+200% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "7% Mana Stolen per Hit",
+      "12-15% Life Stolen per Hit",
+      "Prevent Monster Heal",
+      "+30 to All Attributes",
+      "+1 to Light Radius",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Call to Arms",
+    "runes": ["Amn", "Ral", "Mal", "Ist", "Ohm"],
+    "types": ["Weapons"],
+    "sockets": 5,
+    "requiredLevel": 57,
+    "description": "Weapon swap staple granting Battle Orders and Battle Command to all builds.",
+    "stats": [
+      "+1 to All Skills",
+      "+40% Increased Attack Speed",
+      "+250-290% Enhanced Damage",
+      "Adds 5-30 Fire Damage",
+      "7% Life Stolen per Hit",
+      "+2-6 to Battle Command",
+      "+1-6 to Battle Orders",
+      "+1-4 to Battle Cry",
+      "Prevent Monster Heal",
+      "Replenish Life +12",
+      "30% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Chains of Honor",
+    "runes": ["Dol", "Um", "Ber", "Ist"],
+    "types": ["Body Armor"],
+    "sockets": 4,
+    "requiredLevel": 63,
+    "description": "Top-tier body armor with skills, damage bonuses, and high all-resist.",
+    "stats": [
+      "+2 to All Skills",
+      "+200% Damage to Demons",
+      "+100% Damage to Undead",
+      "8% Life Stolen per Hit",
+      "+70% Enhanced Defense",
+      "+20 to Strength",
+      "Replenish Life +7",
+      "All Resistances +65",
+      "Damage Reduced by 8%",
+      "25% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Chaos",
+    "runes": ["Fal", "Ohm", "Um"],
+    "types": ["Claws"],
+    "sockets": 3,
+    "requiredLevel": 57,
+    "description": "Whirlwind claw for Assassins with Frozen Orb proc.",
+    "stats": [
+      "9% Chance to Cast Level 11 Frozen Orb on Striking",
+      "11% Chance to Cast Level 9 Chain Lightning on Striking",
+      "+35% Increased Attack Speed",
+      "+290-340% Enhanced Damage",
+      "Adds 216-471 Magic Damage",
+      "25% Chance of Open Wounds",
+      "+1 to Whirlwind",
+      "+10 to Strength",
+      "+15 Life After Each Kill"
+    ]
+  },
+  {
+    "name": "Crescent Moon",
+    "runes": ["Shael", "Um", "Tir"],
+    "types": ["Axes", "Polearms", "Swords"],
+    "sockets": 3,
+    "requiredLevel": 47,
+    "description": "Static Field and Amplify proc weapon favored by chain lightning builds.",
+    "stats": [
+      "10% Chance to Cast Level 17 Chain Lightning on Striking",
+      "7% Chance to Cast Level 13 Static Field on Striking",
+      "+20% Increased Attack Speed",
+      "+180-220% Enhanced Damage",
+      "Ignore Target's Defense",
+      "-35% to Enemy Lightning Resist",
+      "25% Chance of Open Wounds",
+      "+9-11 Magic Absorb",
+      "+2 to Mana After Each Kill",
+      "Level 18 Summon Spirit Wolf (30 Charges)"
+    ]
+  },
+  {
+    "name": "Death",
+    "runes": ["Hel", "El", "Vex", "Ort", "Gul"],
+    "types": ["Swords", "Axes"],
+    "sockets": 5,
+    "requiredLevel": 55,
+    "description": "Indestructible sword/axe runeword with massive crushing blow chance.",
+    "stats": [
+      "Indestructible",
+      "100% Chance to Cast Level 44 Chain Lightning When You Die",
+      "25% Chance to Cast Level 18 Glacial Spike on Attack",
+      "+300-385% Enhanced Damage",
+      "+200% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "+7% Mana Stolen per Hit",
+      "50% Chance of Crushing Blow",
+      "+20% Deadly Strike",
+      "Requirements -20%",
+      "+2 to Mana After Each Kill",
+      "Level 22 Blood Golem (15 Charges)"
+    ]
+  },
+  {
+    "name": "Delirium",
+    "runes": ["Lem", "Ist", "Io"],
+    "types": ["Helms"],
+    "sockets": 3,
+    "requiredLevel": 51,
+    "description": "Helm with powerful crowd-control procs including random transformation.",
+    "stats": [
+      "1% Chance to Cast Level 50 Delirium When Struck",
+      "6% Chance to Cast Level 14 Mind Blast When Struck",
+      "14% Chance to Cast Level 13 Terror When Struck",
+      "+2 to All Skills",
+      "+261 Defense",
+      "+10 to Vitality",
+      "50% Extra Gold from Monsters",
+      "25% Better Chance of Getting Magic Items",
+      "Level 17 Attract (60 Charges)"
+    ]
+  },
+  {
+    "name": "Destruction",
+    "runes": ["Vex", "Lo", "Ber", "Jah", "Ko"],
+    "types": ["Polearms", "Swords"],
+    "sockets": 5,
+    "requiredLevel": 65,
+    "description": "Powerful weapon runeword with Pentagram and Molten Boulder procs.",
+    "stats": [
+      "23% Chance to Cast Level 12 Volcano on Striking",
+      "5% Chance to Cast Level 23 Molten Boulder on Striking",
+      "100% Chance to Cast Level 45 Meteor When You Die",
+      "15% Chance to Cast Level 22 Nova on Attack",
+      "+350% Enhanced Damage",
+      "Ignore Target's Defense",
+      "Adds 100-180 Magic Damage",
+      "7% Mana Stolen per Hit",
+      "20% Chance of Crushing Blow",
+      "20% Deadly Strike",
+      "Prevent Monster Heal",
+      "+10 to Dexterity"
+    ]
+  },
+  {
+    "name": "Doom",
+    "runes": ["Hel", "Ohm", "Um", "Lo", "Cham"],
+    "types": ["Axes", "Polearms", "Hammers"],
+    "sockets": 5,
+    "requiredLevel": 67,
+    "description": "Holy Freeze aura weapon for slowing entire screens of enemies.",
+    "stats": [
+      "5% Chance to Cast Level 18 Volcano on Striking",
+      "Level 12 Holy Freeze Aura When Equipped",
+      "+2 to All Skills",
+      "+45% Increased Attack Speed",
+      "+330-370% Enhanced Damage",
+      "-(40-60)% to Enemy Cold Resist",
+      "20% Deadly Strike",
+      "25% Chance of Open Wounds",
+      "Prevent Monster Heal",
+      "Freezes Target",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Dragon",
+    "runes": ["Sur", "Lo", "Sol"],
+    "types": ["Body Armor", "Shields"],
+    "sockets": 3,
+    "requiredLevel": 61,
+    "description": "Holy Fire aura armor or shield boosting fire-based builds.",
+    "stats": [
+      "20% Chance to Cast Level 18 Venom When Struck",
+      "12% Chance to Cast Level 15 Hydra on Striking",
+      "Level 14 Holy Fire Aura When Equipped",
+      "+360 Defense",
+      "+230 Defense vs Missile",
+      "+3-5% to Maximum Lightning Resist",
+      "+0.375 to Strength per Level",
+      "Increase Maximum Mana 5%"
+    ]
+  },
+  {
+    "name": "Dream",
+    "runes": ["Io", "Jah", "Pul"],
+    "types": ["Helms", "Shields"],
+    "sockets": 3,
+    "requiredLevel": 65,
+    "description": "Holy Shock aura helm or shield for Paladins and lightning builds.",
+    "stats": [
+      "10% Chance to Cast Level 15 Confuse When Struck",
+      "Level 15 Holy Shock Aura When Equipped",
+      "+20-30% Faster Hit Recovery",
+      "+30% Enhanced Defense",
+      "+150-220 Defense",
+      "+10 to Vitality",
+      "Increase Maximum Life 5%",
+      "+0.625 to Mana per Level",
+      "All Resistances +5-20",
+      "12-25% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Duress",
+    "runes": ["Shael", "Um", "Thul"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 47,
+    "description": "Defense armor with crushing blow, open wounds, and cold damage.",
+    "stats": [
+      "+40% Faster Hit Recovery",
+      "+10-20% Enhanced Damage",
+      "Adds 37-133 Cold Damage",
+      "15% Chance of Crushing Blow",
+      "33% Chance of Open Wounds",
+      "+150-200% Enhanced Defense",
+      "-20% Slower Stamina Drain",
+      "Cold Resist +45%",
+      "Lightning Resist +15%",
+      "Fire Resist +15%",
+      "Poison Resist +15%"
+    ]
+  },
+  {
+    "name": "Edge",
+    "runes": ["Tir", "Tal", "Amn"],
+    "types": ["Missile Weapons"],
+    "sockets": 3,
+    "requiredLevel": 25,
+    "description": "Thorns aura bow with life leech and vendor price reduction.",
+    "stats": [
+      "Level 15 Thorns Aura When Equipped",
+      "+35% Increased Attack Speed",
+      "+320-380% Damage to Demons",
+      "+280% Damage to Undead",
+      "+75 Poison Damage over 5 Seconds",
+      "7% Life Stolen per Hit",
+      "Prevent Monster Heal",
+      "+5-10 to All Attributes",
+      "+2 to Mana After Each Kill",
+      "Reduces All Vendor Prices 15%"
+    ]
+  },
+  {
+    "name": "Enigma",
+    "runes": ["Jah", "Ith", "Ber"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 65,
+    "description": "Best-in-slot armor for most builds granting Teleport to all classes.",
+    "stats": [
+      "+2 to All Skills",
+      "+45% Faster Run/Walk",
+      "+1 to Teleport",
+      "+750-775 Defense",
+      "+0.75 to Strength per Level",
+      "Increase Maximum Life 5%",
+      "Damage Reduced by 8%",
+      "+14% Life Stolen per Hit",
+      "15% Damage Goes to Mana",
+      "+1-99% Better Chance of Getting Magic Items per Level"
+    ]
+  },
+  {
+    "name": "Eternity",
+    "runes": ["Amn", "Ber", "Ist", "Sol", "Sur"],
+    "types": ["Melee Weapons"],
+    "sockets": 5,
+    "requiredLevel": 63,
+    "description": "Indestructible melee weapon with revive charges and slow target.",
+    "stats": [
+      "Indestructible",
+      "+260-310% Enhanced Damage",
+      "+9 to Minimum Damage",
+      "7% Life Stolen per Hit",
+      "20% Chance of Crushing Blow",
+      "Hit Blinds Target",
+      "Slows Target by 33%",
+      "Replenish Mana 16%",
+      "Cannot be Frozen",
+      "30% Better Chance of Getting Magic Items",
+      "Level 8 Revive (88 Charges)"
+    ]
+  },
+  {
+    "name": "Exile",
+    "runes": ["Vex", "Ohm", "Ist", "Dol"],
+    "types": ["Paladin Shields"],
+    "sockets": 4,
+    "requiredLevel": 57,
+    "description": "Top Paladin shield granting Defiance aura and high defense.",
+    "stats": [
+      "15% Chance to Cast Level 5 Life Tap on Striking",
+      "Level 13-16 Defiance Aura When Equipped",
+      "+2 to Offensive Auras (Paladin Only)",
+      "+30% Faster Block Rate",
+      "Freezes Target",
+      "+220-260% Enhanced Defense",
+      "Replenish Life +7",
+      "+5% to Maximum Cold Resist",
+      "+5% to Maximum Fire Resist",
+      "25% Better Chance of Getting Magic Items",
+      "Repairs 1 Durability in 4 Seconds"
+    ]
+  },
+  {
+    "name": "Faith",
+    "runes": ["Ohm", "Jah", "Lem", "Eld"],
+    "types": ["Missile Weapons"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "Fanaticism aura bow for Bowazons and act 1 mercenaries.",
+    "stats": [
+      "Level 12-15 Fanaticism Aura When Equipped",
+      "+1-2 to All Skills",
+      "+330% Enhanced Damage",
+      "Ignore Target's Defense",
+      "300% Bonus to Attack Rating",
+      "+75% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "+120 Fire Damage",
+      "All Resistances +15",
+      "10% Reanimate As: Returned",
+      "75% Extra Gold from Monsters"
+    ]
+  },
+  {
+    "name": "Famine",
+    "runes": ["Fal", "Ohm", "Ort", "Jah"],
+    "types": ["Axes", "Hammers"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "Elemental damage weapon with ignore target's defense.",
+    "stats": [
+      "+30% Increased Attack Speed",
+      "+320-370% Enhanced Damage",
+      "Ignore Target's Defense",
+      "Adds 180-200 Magic Damage",
+      "Adds 50-200 Fire Damage",
+      "Adds 51-250 Lightning Damage",
+      "Adds 50-200 Cold Damage",
+      "12% Life Stolen per Hit",
+      "Prevent Monster Heal",
+      "+10 to Strength"
+    ]
+  },
+  {
+    "name": "Flickering Flame",
+    "runes": ["Nef", "Pul", "Vex"],
+    "types": ["Helms"],
+    "sockets": 3,
+    "requiredLevel": 55,
+    "description": "D2R-added helm granting Resist Fire aura for fire-based builds.",
+    "stats": [
+      "Level 4-8 Resist Fire Aura When Equipped",
+      "+3 to Fire Skills",
+      "-10-15% to Enemy Fire Resist",
+      "+30% Enhanced Defense",
+      "+30 Defense",
+      "+7 to Vitality (based on character level)",
+      "Regenerate Mana 6%",
+      "Half Freeze Duration",
+      "+5% to Maximum Fire Resist",
+      "Poison Resist +22%"
+    ]
+  },
+  {
+    "name": "Fortitude",
+    "runes": ["El", "Sol", "Dol", "Lo"],
+    "types": ["Weapons", "Body Armor"],
+    "sockets": 4,
+    "requiredLevel": 59,
+    "description": "High Enhanced Damage weapon or high-defense armor; versatile best-in-slot.",
+    "stats": [
+      "20% Chance to Cast Level 15 Chilling Armor when Struck",
+      "+25% Faster Cast Rate",
+      "+300% Enhanced Damage (weapon) / +200% Enhanced Defense (armor)",
+      "+200% Enhanced Defense",
+      "+((8-12) per Level) to Life",
+      "All Resistances +25-30",
+      "12% Damage Taken Goes to Mana",
+      "+1 to Light Radius"
+    ]
+  },
+  {
+    "name": "Fury",
+    "runes": ["Jah", "Gul", "Eth"],
+    "types": ["Melee Weapons"],
+    "sockets": 3,
+    "requiredLevel": 65,
+    "description": "Frenzy-synergy weapon with high damage and life steal.",
+    "stats": [
+      "+209% Enhanced Damage",
+      "40% Increased Attack Speed",
+      "Prevent Monster Heal",
+      "66% Chance of Open Wounds",
+      "33% Deadly Strike",
+      "Ignore Target's Defense",
+      "-25% Target Defense",
+      "20% Bonus to Attack Rating",
+      "6% Life Stolen per Hit",
+      "+5 to Frenzy (Barbarian Only)"
+    ]
+  },
+  {
+    "name": "Gloom",
+    "runes": ["Fal", "Um", "Pul"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 47,
+    "description": "Defensive armor blinding attackers and granting lightning resist.",
+    "stats": [
+      "15% Chance to Cast Level 3 Dim Vision When Struck",
+      "+10% Faster Hit Recovery",
+      "+200-260% Enhanced Defense",
+      "+10 to Strength",
+      "All Resistances +45",
+      "Half Freeze Duration",
+      "5% Damage Taken Goes to Mana",
+      "-3 to Light Radius"
+    ]
+  },
+  {
+    "name": "Grief",
+    "runes": ["Eth", "Tir", "Lo", "Mal", "Ral"],
+    "types": ["Swords", "Axes"],
+    "sockets": 5,
+    "requiredLevel": 59,
+    "description": "Best-in-slot physical damage sword/axe with flat damage bonus.",
+    "stats": [
+      "35% Chance to Cast Level 15 Venom on Striking",
+      "+30-40% Increased Attack Speed",
+      "Damage +340-400",
+      "Ignore Target's Defense",
+      "-25% Target Defense",
+      "+(1.875 per Level)% Deadly Strike",
+      "Prevent Monster Heal",
+      "+2 to Mana After Each Kill",
+      "3-8% Life Stolen per Hit"
+    ]
+  },
+  {
+    "name": "Hand of Justice",
+    "runes": ["Sur", "Cham", "Amn", "Lo"],
+    "types": ["Weapons"],
+    "sockets": 4,
+    "requiredLevel": 67,
+    "description": "Holy Fire aura weapon with Blaze and Meteor procs.",
+    "stats": [
+      "100% Chance to Cast Level 36 Blaze When You Level-Up",
+      "100% Chance to Cast Level 48 Meteor When You Die",
+      "Level 16 Holy Fire Aura When Equipped",
+      "+33% Increased Attack Speed",
+      "+280-330% Enhanced Damage",
+      "Ignore Target's Defense",
+      "7% Life Stolen per Hit",
+      "-20% to Enemy Fire Resist",
+      "20% Deadly Strike",
+      "Hit Blinds Target",
+      "Freezes Target +3"
+    ]
+  },
+  {
+    "name": "Harmony",
+    "runes": ["Tir", "Ith", "Sol", "Ko"],
+    "types": ["Missile Weapons"],
+    "sockets": 4,
+    "requiredLevel": 39,
+    "description": "Vigor aura bow with elemental damage, great for mercenaries.",
+    "stats": [
+      "Level 10 Vigor Aura When Equipped",
+      "+200-275% Enhanced Damage",
+      "+9 to Minimum Damage",
+      "+9 to Maximum Damage",
+      "Adds 55-160 Fire Damage",
+      "Adds 55-160 Lightning Damage",
+      "Adds 55-160 Cold Damage",
+      "20% Increased Attack Speed",
+      "+2-6 to Valkyrie",
+      "+10 to Dexterity",
+      "Regenerate Mana 20%",
+      "+2 to Mana After Each Kill",
+      "+2 to Light Radius",
+      "Level 20 Revive (25 Charges)"
+    ]
+  },
+  {
+    "name": "Heart of the Oak",
+    "runes": ["Ko", "Vex", "Pul", "Thul"],
+    "types": ["Staves", "Maces"],
+    "sockets": 4,
+    "requiredLevel": 55,
+    "description": "Best caster weapon for Druids and Sorceresses with +3 all skills.",
+    "stats": [
+      "+3 to All Skills",
+      "+40% Faster Cast Rate",
+      "+75% Damage to Demons",
+      "+100 to Attack Rating Against Demons",
+      "Adds 3-14 Cold Damage",
+      "+12 to Dexterity",
+      "Replenish Life +20",
+      "Increase Maximum Mana 15%",
+      "All Resistances +30-40",
+      "Level 4 Oak Sage (25 Charges)",
+      "Level 14 Raven (60 Charges)"
+    ]
+  },
+  {
+    "name": "Holy Thunder",
+    "runes": ["Eth", "Ral", "Ort", "Tal"],
+    "types": ["Scepters"],
+    "sockets": 4,
+    "requiredLevel": 21,
+    "description": "Early Paladin scepter with Resist Lightning aura.",
+    "stats": [
+      "+60% Enhanced Damage",
+      "-25% Target Defense",
+      "Adds 5-30 Fire Damage",
+      "Adds 21-110 Lightning Damage",
+      "+75 Poison Damage over 5 Seconds",
+      "+10 to Maximum Damage",
+      "Lightning Resist +60%",
+      "+5 to Maximum Lightning Resist",
+      "Fire Resist +33%",
+      "Level 7 Chain Lightning (60 Charges)"
+    ]
+  },
+  {
+    "name": "Honor",
+    "runes": ["Amn", "El", "Ith", "Tir", "Sol"],
+    "types": ["Melee Weapons"],
+    "sockets": 5,
+    "requiredLevel": 27,
+    "description": "Early melee weapon with skill bonus and life steal.",
+    "stats": [
+      "+1 to All Skills",
+      "+160% Enhanced Damage",
+      "+9 to Minimum Damage",
+      "+9 to Maximum Damage",
+      "25% Deadly Strike",
+      "+250 to Attack Rating",
+      "7% Life Stolen per Hit",
+      "+10 to Strength",
+      "Replenish Life +10",
+      "+2 to Mana After Each Kill",
+      "+1 to Light Radius"
+    ]
+  },
+  {
+    "name": "Ice",
+    "runes": ["Amn", "Shael", "Jah", "Lo"],
+    "types": ["Missile Weapons"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "Holy Freeze aura bow with Blizzard proc for cold Bowazons.",
+    "stats": [
+      "100% Chance to Cast Level 40 Blizzard When You Level-Up",
+      "25% Chance to Cast Level 22 Frost Nova on Striking",
+      "Level 18 Holy Freeze Aura When Equipped",
+      "+20% Increased Attack Speed",
+      "+140-210% Enhanced Damage",
+      "Ignore Target's Defense",
+      "+25-30% to Cold Skill Damage",
+      "-20% to Enemy Cold Resist",
+      "7% Life Stolen per Hit",
+      "20% Deadly Strike",
+      "3.125% Extra Gold from Monsters per Level"
+    ]
+  },
+  {
+    "name": "Infinity",
+    "runes": ["Ber", "Mal", "Ber", "Ist"],
+    "types": ["Polearms"],
+    "sockets": 4,
+    "requiredLevel": 63,
+    "description": "Mercenary staple granting Conviction aura and crushing blow.",
+    "stats": [
+      "50% Chance to Cast Level 20 Chain Lightning When You Kill an Enemy",
+      "Level 12 Conviction Aura When Equipped",
+      "+35% Faster Run/Walk",
+      "+255-325% Enhanced Damage",
+      "-(45-55)% to Enemy Lightning Resist",
+      "40% Chance of Crushing Blow",
+      "Prevent Monster Heal",
+      "+0.5 to Strength per Level",
+      "30% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Insight",
+    "runes": ["Ral", "Tir", "Tal", "Sol"],
+    "types": ["Polearms", "Staves"],
+    "sockets": 4,
+    "requiredLevel": 27,
+    "description": "Meditation aura polearm for mercenaries, enabling mana-hungry builds.",
+    "stats": [
+      "Level 12-17 Meditation Aura When Equipped",
+      "+35% Faster Cast Rate",
+      "+200-260% Enhanced Damage",
+      "+9 to Minimum Damage",
+      "180-250% Bonus to Attack Rating",
+      "Adds 5-30 Fire Damage",
+      "+75 Poison Damage over 5 Seconds",
+      "+1-6 to Critical Strike",
+      "+5 to All Attributes",
+      "+2 to Mana After Each Kill",
+      "23% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "King's Grace",
+    "runes": ["Amn", "Ral", "Thul"],
+    "types": ["Swords", "Scepters"],
+    "sockets": 3,
+    "requiredLevel": 25,
+    "description": "Straightforward sword or scepter with bonuses versus demons and undead.",
+    "stats": [
+      "+100% Enhanced Damage",
+      "+150% Damage to Demons",
+      "+100 to Attack Rating Against Demons",
+      "+100% Damage to Undead",
+      "+100 to Attack Rating Against Undead",
+      "Adds 5-30 Fire Damage",
+      "Adds 3-14 Cold Damage",
+      "+150 to Attack Rating",
+      "7% Life Stolen per Hit"
+    ]
+  },
+  {
+    "name": "Kingslayer",
+    "runes": ["Mal", "Um", "Gul", "Fal"],
+    "types": ["Swords", "Axes"],
+    "sockets": 4,
+    "requiredLevel": 53,
+    "description": "High crushing blow sword or axe with prevent monster heal.",
+    "stats": [
+      "+30% Increased Attack Speed",
+      "+230-270% Enhanced Damage",
+      "-25% Target Defense",
+      "20% Bonus to Attack Rating",
+      "33% Chance of Crushing Blow",
+      "50% Chance of Open Wounds",
+      "+1 to Vengeance",
+      "Prevent Monster Heal",
+      "+10 to Strength",
+      "40% Extra Gold from Monsters"
+    ]
+  },
+  {
+    "name": "Last Wish",
+    "runes": ["Jah", "Mal", "Jah", "Sur", "Jah", "Ber"],
+    "types": ["Axes", "Hammers", "Swords"],
+    "sockets": 6,
+    "requiredLevel": 65,
+    "description": "Might aura weapon with Fade, Life Tap, and massive crushing blow.",
+    "stats": [
+      "6% Chance to Cast Level 11 Fade When Struck",
+      "10% Chance to Cast Level 18 Life Tap on Striking",
+      "20% Chance to Cast Level 20 Charged Bolt on Attack",
+      "Level 17 Might Aura When Equipped",
+      "+330-375% Enhanced Damage",
+      "Ignore Target's Defense",
+      "60-70% Chance of Crushing Blow",
+      "Prevent Monster Heal",
+      "Hit Blinds Target",
+      "0.5% Chance of Getting Magic Items per Level"
+    ]
+  },
+  {
+    "name": "Lawbringer",
+    "runes": ["Amn", "Lem", "Ko"],
+    "types": ["Swords", "Hammers", "Scepters"],
+    "sockets": 3,
+    "requiredLevel": 43,
+    "description": "Sanctuary aura weapon preventing corpse recovery, popular for Smite.",
+    "stats": [
+      "20% Chance to Cast Level 15 Decrepify on Striking",
+      "Level 16-18 Sanctuary Aura When Equipped",
+      "-50% Target Defense",
+      "Adds 150-210 Fire Damage",
+      "Adds 130-180 Cold Damage",
+      "7% Life Stolen per Hit",
+      "Slows Target by 20%",
+      "Knockback",
+      "75% Extra Gold from Monsters"
+    ]
+  },
+  {
+    "name": "Leaf",
+    "runes": ["Tir", "Ral"],
+    "types": ["Staves"],
+    "sockets": 2,
+    "requiredLevel": 19,
+    "description": "Early Sorceress fire staff boosting fire skills.",
+    "stats": [
+      "+3 to Fire Skills",
+      "+3 to Inferno (Sorceress Only)",
+      "+3 to Warmth (Sorceress Only)",
+      "+3 to Fire Bolt (Sorceress Only)",
+      "+2 to Mana After Each Kill",
+      "+33% Enhanced Damage",
+      "+33 to Mana"
+    ]
+  },
+  {
+    "name": "Lionheart",
+    "runes": ["Hel", "Lum", "Fal"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 41,
+    "description": "Stat-heavy armor with all-resist bonuses, accessible via Hel requirement reduction.",
+    "stats": [
+      "+20% Enhanced Damage",
+      "+25 to Strength",
+      "+15 to Dexterity",
+      "+20 to Vitality",
+      "+10 to Energy",
+      "+50 to Life",
+      "All Resistances +30",
+      "Requirements -15%"
+    ]
+  },
+  {
+    "name": "Lore",
+    "runes": ["Ort", "Sol"],
+    "types": ["Helms"],
+    "sockets": 2,
+    "requiredLevel": 27,
+    "description": "Budget helm with +1 to all skills for early to mid game.",
+    "stats": [
+      "+1 to All Skills",
+      "+10 to Energy",
+      "+2 to Mana After Each Kill",
+      "Lightning Resist +30%",
+      "Damage Reduced by 7",
+      "+2 to Light Radius"
+    ]
+  },
+  {
+    "name": "Malice",
+    "runes": ["Ith", "El", "Eth"],
+    "types": ["Melee Weapons"],
+    "sockets": 3,
+    "requiredLevel": 15,
+    "description": "Very early melee weapon with open wounds and prevent monster heal.",
+    "stats": [
+      "+33% Enhanced Damage",
+      "+9 to Maximum Damage",
+      "100% Chance of Open Wounds",
+      "-25% Target Defense",
+      "-100 to Monster Defense per Hit",
+      "Prevent Monster Heal",
+      "-1 to Light Radius"
+    ]
+  },
+  {
+    "name": "Memory",
+    "runes": ["Lum", "Io", "Sol", "Eth"],
+    "types": ["Staves"],
+    "sockets": 4,
+    "requiredLevel": 37,
+    "description": "Sorceress weapon-swap staff boosting Energy Shield and Warmth.",
+    "stats": [
+      "+3 to Sorceress Skill Levels",
+      "+33% Faster Cast Rate",
+      "+9 to Minimum Damage",
+      "-25% Target Defense",
+      "+3 to Energy Shield (Sorceress Only)",
+      "+2 to Static Field (Sorceress Only)",
+      "+50% Enhanced Defense",
+      "+10 to Vitality",
+      "+10 to Energy",
+      "Increase Maximum Mana 20%",
+      "Magic Damage Reduced by 7"
+    ]
+  },
+  {
+    "name": "Metamorphosis",
+    "runes": ["Io", "Cham", "Fal"],
+    "types": ["Helms"],
+    "sockets": 3,
+    "requiredLevel": 67,
+    "description": "D2R-added helm granting enhanced shapeshifting bonuses for Druids.",
+    "stats": [
+      "+50% Faster Run/Walk (in Beast Form)",
+      "+1 to Shapeshifting Skills (Druid Only)",
+      "Cannot be Frozen",
+      "+13 to Vitality per Character Level",
+      "5% Life Stolen per Hit (in Beast Form)",
+      "+40 to Strength",
+      "Replenish Life +10"
+    ]
+  },
+  {
+    "name": "Mist",
+    "runes": ["Cham", "Shael", "Gul", "Thul", "Ith"],
+    "types": ["Missile Weapons"],
+    "sockets": 5,
+    "requiredLevel": 67,
+    "description": "D2R-added bow granting Concentration aura for any bow build.",
+    "stats": [
+      "Level 8-12 Concentration Aura When Equipped",
+      "+3 to All Skills",
+      "+20% Increased Attack Speed",
+      "+100% Piercing Attack",
+      "+325-375% Enhanced Damage",
+      "+9 to Maximum Damage",
+      "20% Bonus to Attack Rating",
+      "Adds 3-14 Cold Damage",
+      "Freeze Target +3",
+      "All Resistances +24",
+      "+40 to Strength"
+    ]
+  },
+  {
+    "name": "Myth",
+    "runes": ["Hel", "Amn", "Nef"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 25,
+    "description": "Budget Barbarian armor with warcry skill bonus and life steal.",
+    "stats": [
+      "3% Chance to Cast Level 1 Howl When Struck",
+      "10% Chance to Cast Level 1 Taunt on Striking",
+      "+2 to Barbarian Skill Levels",
+      "+30 Defense Against Missile",
+      "Replenish Life +10",
+      "Attacker Takes Damage of 14",
+      "Requirements -15%"
+    ]
+  },
+  {
+    "name": "Nadir",
+    "runes": ["Nef", "Tir"],
+    "types": ["Helms"],
+    "sockets": 2,
+    "requiredLevel": 13,
+    "description": "Low-level helm with knockback, useful for early characters.",
+    "stats": [
+      "+50% Enhanced Defense",
+      "+10 Defense",
+      "+30 Defense vs Missile",
+      "+5 to Strength",
+      "+2 to Mana After Each Kill",
+      "-33% Gold from Monsters",
+      "-3 to Light Radius",
+      "Level 13 Cloak of Shadows (9 Charges)"
+    ]
+  },
+  {
+    "name": "Oath",
+    "runes": ["Shael", "Pul", "Mal", "Lum"],
+    "types": ["Axes", "Maces", "Swords"],
+    "sockets": 4,
+    "requiredLevel": 49,
+    "description": "Indestructible melee weapon with high damage and crushing blow.",
+    "stats": [
+      "Indestructible",
+      "30% Chance to Cast Level 20 Bone Spirit on Striking",
+      "+50% Increased Attack Speed",
+      "+210-340% Enhanced Damage",
+      "+75% Damage to Demons",
+      "+100 to Attack Rating Against Demons",
+      "Prevent Monster Heal",
+      "+10 to Energy",
+      "+10-15 Magic Absorb",
+      "Level 16 Heart of Wolverine (20 Charges)",
+      "Level 17 Iron Golem (14 Charges)"
+    ]
+  },
+  {
+    "name": "Obedience",
+    "runes": ["Hel", "Ko", "Thul", "Eth", "Fal"],
+    "types": ["Polearms"],
+    "sockets": 5,
+    "requiredLevel": 41,
+    "description": "Budget mercenary polearm with high damage and crushing blow.",
+    "stats": [
+      "30% Chance to Cast Level 21 Enchant When You Kill an Enemy",
+      "+40% Faster Hit Recovery",
+      "+370% Enhanced Damage",
+      "-25% Target Defense",
+      "Adds 3-14 Cold Damage",
+      "-25% to Enemy Fire Resist",
+      "40% Chance of Crushing Blow",
+      "+200-300 Defense",
+      "+10 to Strength",
+      "+10 to Dexterity",
+      "All Resistances +20-30",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Obsession",
+    "runes": ["Zod", "Ist", "Lem", "Lum", "Io", "Nef"],
+    "types": ["Staves"],
+    "sockets": 6,
+    "requiredLevel": 69,
+    "description": "D2R-added indestructible staff for casters with high mana and FCR.",
+    "stats": [
+      "Indestructible",
+      "24% Chance to Cast Level 10 Weaken When Struck",
+      "+4 to All Skills",
+      "+65% Faster Cast Rate",
+      "+60% Faster Hit Recovery",
+      "Ignore Target's Defense",
+      "+10 to Vitality",
+      "Increase Maximum Life 15-25%",
+      "Regenerate Mana 15-30%",
+      "All Resistances +60-70",
+      "75% Extra Gold from Monsters",
+      "30% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Passion",
+    "runes": ["Dol", "Ort", "Eld", "Lem"],
+    "types": ["Weapons"],
+    "sockets": 4,
+    "requiredLevel": 43,
+    "description": "Weapon granting Zeal and Berserk skills to any class.",
+    "stats": [
+      "+25% Increased Attack Speed",
+      "+160-210% Enhanced Damage",
+      "50-80% Bonus to Attack Rating",
+      "+75% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "Adds 1-50 Lightning Damage",
+      "+1 to Berserk",
+      "+1 to Zeal",
+      "Hit Blinds Target +10",
+      "Hit Causes Monster to Flee 25%",
+      "75% Extra Gold from Monsters",
+      "Level 3 Heart of Wolverine (12 Charges)"
+    ]
+  },
+  {
+    "name": "Pattern",
+    "runes": ["Tal", "Ort", "Tir"],
+    "types": ["Claws"],
+    "sockets": 3,
+    "requiredLevel": 23,
+    "description": "D2R-added early Assassin claw with elemental damage and resistances.",
+    "stats": [
+      "+30% Faster Block Rate",
+      "+40-80% Enhanced Damage",
+      "+10% Bonus to Attack Rating",
+      "Adds 17-62 Fire Damage",
+      "Adds 1-50 Lightning Damage",
+      "Adds 3-14 Cold Damage",
+      "+7 to Strength",
+      "+7 to Dexterity",
+      "All Resistances +15"
+    ]
+  },
+  {
+    "name": "Phoenix",
+    "runes": ["Vex", "Vex", "Lo", "Jah"],
+    "types": ["Weapons", "Shields"],
+    "sockets": 4,
+    "requiredLevel": 65,
+    "description": "Redemption aura weapon or shield for sustain-heavy builds.",
+    "stats": [
+      "100% Chance to Cast Level 40 Blaze When You Level-Up",
+      "40% Chance to Cast Level 22 Firestorm on Striking",
+      "Level 10-15 Redemption Aura When Equipped",
+      "+350-400% Enhanced Damage (weapon) / +350-400% Enhanced Defense (shield)",
+      "-28% to Enemy Fire Resist",
+      "+350-400 Defense vs Missile",
+      "+50 to Life",
+      "+5% to Maximum Lightning Resist",
+      "+10% to Maximum Fire Resist"
+    ]
+  },
+  {
+    "name": "Plague",
+    "runes": ["Cham", "Shael", "Um"],
+    "types": ["Swords", "Axes", "Claws"],
+    "sockets": 3,
+    "requiredLevel": 67,
+    "description": "D2R-added weapon with Cleansing aura and deadly Poison Nova proc.",
+    "stats": [
+      "20% Chance to Cast Level 12 Lower Resist When Struck",
+      "25% Chance to Cast Level 15 Poison Nova on Striking",
+      "Level 13-17 Cleansing Aura When Equipped",
+      "+1-2 to All Skills",
+      "+20% Increased Attack Speed",
+      "+220-320% Enhanced Damage",
+      "-23% to Enemy Poison Resist",
+      "0.3% (0-29.7)% Deadly Strike per Level",
+      "25% Chance of Open Wounds",
+      "Freezes Target +3"
+    ]
+  },
+  {
+    "name": "Pride",
+    "runes": ["Cham", "Sur", "Io", "Lo"],
+    "types": ["Polearms"],
+    "sockets": 4,
+    "requiredLevel": 67,
+    "description": "Concentration aura polearm for mercenaries supporting physical builds.",
+    "stats": [
+      "25% Chance to Cast Level 17 Fire Wall When Struck",
+      "Level 16-20 Concentration Aura When Equipped",
+      "260-300% Bonus to Attack Rating",
+      "+1-99% Damage to Demons per Level",
+      "Adds 50-280 Lightning Damage",
+      "20% Deadly Strike",
+      "Hit Blinds Target",
+      "Freezes Target +3",
+      "+10 to Vitality",
+      "Replenish Life +8",
+      "+1.875% Extra Gold from Monsters per Level"
+    ]
+  },
+  {
+    "name": "Principle",
+    "runes": ["Ral", "Gul", "Eld"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 55,
+    "description": "Paladin-centric body armor with Holy Bolt proc and skill bonuses.",
+    "stats": [
+      "100% Chance to Cast Level 5 Holy Bolt on Striking",
+      "+2 to Paladin Skill Levels",
+      "+50% Damage to Undead",
+      "+100 to Attack Rating Against Undead",
+      "15% Slower Stamina Drain",
+      "+5% to Maximum Poison Resist",
+      "Fire Resist +30%"
+    ]
+  },
+  {
+    "name": "Prudence",
+    "runes": ["Mal", "Tir"],
+    "types": ["Body Armor"],
+    "sockets": 2,
+    "requiredLevel": 49,
+    "description": "Budget armor with solid all-resist and magic damage reduction.",
+    "stats": [
+      "+25% Faster Hit Recovery",
+      "+140-170% Enhanced Defense",
+      "All Resistances +25-35",
+      "Damage Reduced by 3",
+      "Magic Damage Reduced by 17",
+      "+2 to Mana After Each Kill",
+      "+1 to Light Radius",
+      "Repairs 1 Durability in 4 Seconds"
+    ]
+  },
+  {
+    "name": "Radiance",
+    "runes": ["Nef", "Sol", "Ith"],
+    "types": ["Helms"],
+    "sockets": 3,
+    "requiredLevel": 27,
+    "description": "Caster helm with mana bonuses and damage reduction.",
+    "stats": [
+      "+75% Enhanced Defense",
+      "+30 Defense vs Missile",
+      "+10 to Vitality",
+      "+10 to Energy",
+      "+33 to Mana",
+      "Damage Reduced by 7",
+      "Magic Damage Reduced by 3",
+      "15% Damage Goes to Mana",
+      "+5 to Light Radius"
+    ]
+  },
+  {
+    "name": "Rain",
+    "runes": ["Ort", "Mal", "Ith"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 49,
+    "description": "Druid armor with shapeshifting and elemental summon skill bonuses.",
+    "stats": [
+      "5% Chance to Cast Level 15 Cyclone Armor When Struck",
+      "5% Chance to Cast Level 15 Twister on Striking",
+      "+2 to Druid Skills",
+      "+100-150 to Mana",
+      "Lightning Resist +30%",
+      "Magic Damage Reduced by 7",
+      "15% Damage Goes to Mana"
+    ]
+  },
+  {
+    "name": "Rhyme",
+    "runes": ["Shael", "Eth"],
+    "types": ["Shields"],
+    "sockets": 2,
+    "requiredLevel": 29,
+    "description": "Budget shield with Cannot be Frozen and high block rate.",
+    "stats": [
+      "+40% Faster Block Rate",
+      "+25% Increased Chance of Blocking",
+      "Regenerate Mana 15%",
+      "All Resistances +25",
+      "Cannot be Frozen",
+      "50% Extra Gold from Monsters",
+      "25% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Rift",
+    "runes": ["Hel", "Ko", "Lem", "Gul"],
+    "types": ["Polearms", "Scepters"],
+    "sockets": 4,
+    "requiredLevel": 53,
+    "description": "Elemental damage polearm or scepter with Tornado proc.",
+    "stats": [
+      "20% Chance to Cast Level 16 Tornado on Striking",
+      "16% Chance to Cast Level 21 Frozen Orb on Attack",
+      "20% Bonus to Attack Rating",
+      "+160-250% Damage to Demons",
+      "Adds 60-180 Magic Damage",
+      "Adds 5-30 Fire Damage",
+      "+10 to Dexterity",
+      "38% Damage Goes to Mana",
+      "75% Extra Gold from Monsters",
+      "Level 15 Iron Maiden (40 Charges)",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Sanctuary",
+    "runes": ["Ko", "Ko", "Mal"],
+    "types": ["Shields"],
+    "sockets": 3,
+    "requiredLevel": 49,
+    "description": "High-defense shield with Cannot be Frozen and undead bonuses.",
+    "stats": [
+      "+20% Faster Hit Recovery",
+      "+20% Faster Block Rate",
+      "+20% Increased Chance of Blocking",
+      "+130-160% Enhanced Defense",
+      "+250 Defense vs Missile",
+      "+20 to Dexterity",
+      "All Resistances +50-70",
+      "Magic Damage Reduced by 7",
+      "Level 12 Slow Missiles (60 Charges)"
+    ]
+  },
+  {
+    "name": "Silence",
+    "runes": ["Dol", "Eld", "Hel", "Ist", "Tir", "Vex"],
+    "types": ["Weapons"],
+    "sockets": 6,
+    "requiredLevel": 55,
+    "description": "All-skill weapon with silence effect and high resistances.",
+    "stats": [
+      "+2 to All Skills",
+      "+20% Increased Attack Speed",
+      "+20% Faster Hit Recovery",
+      "+200% Enhanced Damage",
+      "+75% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "11% Mana Stolen per Hit",
+      "Hit Blinds Target +33",
+      "Hit Causes Monster to Flee 25%",
+      "All Resistances +75",
+      "+2 to Mana After Each Kill",
+      "30% Better Chance of Getting Magic Items",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Smoke",
+    "runes": ["Nef", "Lum"],
+    "types": ["Body Armor"],
+    "sockets": 2,
+    "requiredLevel": 37,
+    "description": "Budget early armor with high all-resist bonuses.",
+    "stats": [
+      "+20% Faster Hit Recovery",
+      "+75% Enhanced Defense",
+      "+280 Defense vs Missile",
+      "All Resistances +50",
+      "-1 to Light Radius",
+      "Level 6 Weaken (18 Charges)"
+    ]
+  },
+  {
+    "name": "Spirit",
+    "runes": ["Tal", "Thul", "Ort", "Amn"],
+    "types": ["Swords", "Shields"],
+    "sockets": 4,
+    "requiredLevel": 25,
+    "description": "Best budget caster weapon or shield with +2 skills and FCR.",
+    "stats": [
+      "+2 to All Skills",
+      "+25-35% Faster Cast Rate",
+      "+55% Faster Hit Recovery",
+      "+250 Defense vs Missile",
+      "+22 to Vitality",
+      "+89-112 to Mana",
+      "+3-8 Magic Absorb",
+      "Cold Resist +35%",
+      "Lightning Resist +35%",
+      "Poison Resist +35%",
+      "Attacker Takes Damage of 14"
+    ]
+  },
+  {
+    "name": "Splendor",
+    "runes": ["Eth", "Lum"],
+    "types": ["Shields"],
+    "sockets": 2,
+    "requiredLevel": 37,
+    "description": "Budget shield with magic find and faster block.",
+    "stats": [
+      "+1 to All Skills",
+      "+10% Faster Cast Rate",
+      "+20% Faster Block Rate",
+      "+60-100% Enhanced Defense",
+      "+10 to Energy",
+      "Regenerate Mana 15%",
+      "50% Extra Gold from Monsters",
+      "20% Better Chance of Getting Magic Items",
+      "+3 to Light Radius"
+    ]
+  },
+  {
+    "name": "Stealth",
+    "runes": ["Tal", "Eth"],
+    "types": ["Body Armor"],
+    "sockets": 2,
+    "requiredLevel": 17,
+    "description": "Classic early-game armor with fast cast and run walk bonuses.",
+    "stats": [
+      "+25% Faster Run/Walk",
+      "+25% Faster Cast Rate",
+      "+25% Faster Hit Recovery",
+      "+6 to Dexterity",
+      "+15 to Maximum Stamina",
+      "Poison Resist +30%",
+      "Magic Damage Reduced by 3",
+      "Regenerate Mana 15%"
+    ]
+  },
+  {
+    "name": "Steel",
+    "runes": ["Tir", "El"],
+    "types": ["Swords", "Axes", "Maces"],
+    "sockets": 2,
+    "requiredLevel": 13,
+    "description": "Cheap starter melee weapon with open wounds and mana per kill.",
+    "stats": [
+      "+20% Enhanced Damage",
+      "+3 to Minimum Damage",
+      "+3 to Maximum Damage",
+      "+50 to Attack Rating",
+      "50% Chance of Open Wounds",
+      "+2 to Mana After Each Kill",
+      "+1 to Light Radius"
+    ]
+  },
+  {
+    "name": "Stone",
+    "runes": ["Shael", "Um", "Pul", "Lum"],
+    "types": ["Body Armor"],
+    "sockets": 4,
+    "requiredLevel": 47,
+    "description": "Golem-summoning armor with very high defense and Clay Golem proc.",
+    "stats": [
+      "60% Faster Hit Recovery",
+      "+250-290% Enhanced Defense",
+      "+300 Defense vs Missile",
+      "+16 to Strength",
+      "+16 to Vitality",
+      "+10 to Energy",
+      "All Resistances +15",
+      "Level 16 Molten Boulder (80 Charges)",
+      "Level 16 Clay Golem (16 Charges)"
+    ]
+  },
+  {
+    "name": "Strength",
+    "runes": ["Amn", "Tir"],
+    "types": ["Melee Weapons"],
+    "sockets": 2,
+    "requiredLevel": 25,
+    "description": "Simple melee weapon with crushing blow and life steal.",
+    "stats": [
+      "+35% Enhanced Damage",
+      "25% Chance of Crushing Blow",
+      "7% Life Stolen per Hit",
+      "+2 to Mana After Each Kill",
+      "+20 to Strength",
+      "+10 to Vitality"
+    ]
+  },
+  {
+    "name": "Treachery",
+    "runes": ["Shael", "Thul", "Lem"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 43,
+    "description": "Budget Assassin and mercenary armor with Fade proc and IAS.",
+    "stats": [
+      "5% Chance to Cast Level 15 Fade When Struck",
+      "25% Chance to Cast Level 15 Venom on Striking",
+      "+2 to Assassin Skills",
+      "+45% Increased Attack Speed",
+      "+20% Faster Hit Recovery",
+      "Cold Resist +30%",
+      "50% Extra Gold from Monsters"
+    ]
+  },
+  {
+    "name": "Unbending Will",
+    "runes": ["Fal", "Io", "Ith", "El", "Hel", "Lum"],
+    "types": ["Swords"],
+    "sockets": 6,
+    "requiredLevel": 41,
+    "description": "D2R-added 6-socket sword with taunt proc and high life bonus.",
+    "stats": [
+      "18% Chance to Cast Level 18 Taunt on Striking",
+      "+3 to Combat Skills (Barbarian Only)",
+      "+20-30% Increased Attack Speed",
+      "+330-380% Enhanced Damage",
+      "-20% Target Defense",
+      "+(0.5 per Level)% Life Stolen per Hit",
+      "Prevent Monster Heal",
+      "+10 to Vitality",
+      "Damages Attacker for 14",
+      "Requirements -20%"
+    ]
+  },
+  {
+    "name": "Venom",
+    "runes": ["Tal", "Dol", "Mal"],
+    "types": ["Weapons"],
+    "sockets": 3,
+    "requiredLevel": 49,
+    "description": "Weapon with high poison damage and prevent monster heal.",
+    "stats": [
+      "Ignore Target's Defense",
+      "+273 Poison Damage over 6 Seconds",
+      "7% Mana Stolen per Hit",
+      "Prevent Monster Heal",
+      "Hit Causes Monster to Flee 25%",
+      "Level 13 Poison Explosion (11 Charges)",
+      "Level 15 Poison Dagger (27 Charges)"
+    ]
+  },
+  {
+    "name": "Voice of Reason",
+    "runes": ["Lem", "Ko", "El", "Eld"],
+    "types": ["Swords", "Maces"],
+    "sockets": 4,
+    "requiredLevel": 43,
+    "description": "Cold-damage sword or mace with Frozen Orb and Ice Blast procs.",
+    "stats": [
+      "15% Chance to Cast Level 13 Frozen Orb on Striking",
+      "18% Chance to Cast Level 20 Ice Blast on Striking",
+      "+50 to Attack Rating",
+      "+220-350% Damage to Demons",
+      "+355-375% Damage to Undead",
+      "+50 to Attack Rating Against Undead",
+      "Adds 100-220 Cold Damage",
+      "-24% to Enemy Cold Resist",
+      "+10 to Dexterity",
+      "Cannot be Frozen",
+      "75% Extra Gold from Monsters",
+      "+1 to Light Radius"
+    ]
+  },
+  {
+    "name": "Wealth",
+    "runes": ["Lem", "Ko", "Tir"],
+    "types": ["Body Armor"],
+    "sockets": 3,
+    "requiredLevel": 43,
+    "description": "Magic find and gold find armor for farming runs.",
+    "stats": [
+      "+10 to Dexterity",
+      "+2 to Mana After Each Kill",
+      "+300% Extra Gold from Monsters",
+      "100% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "White",
+    "runes": ["Dol", "Io"],
+    "types": ["Wands"],
+    "sockets": 2,
+    "requiredLevel": 35,
+    "description": "Best early Necromancer wand boosting Bone Spear and Bone Spirit.",
+    "stats": [
+      "+3 to Poison and Bone Skills (Necromancer Only)",
+      "+20% Faster Cast Rate",
+      "+2 to Bone Spear (Necromancer Only)",
+      "+4 to Skeleton Mastery (Necromancer Only)",
+      "+3 to Bone Armor (Necromancer Only)",
+      "Hit Causes Monster to Flee 25%",
+      "+10 to Vitality",
+      "+3 to Mana",
+      "Magic Damage Reduced by 4"
+    ]
+  },
+  {
+    "name": "Wind",
+    "runes": ["Sur", "El"],
+    "types": ["Melee Weapons"],
+    "sockets": 2,
+    "requiredLevel": 61,
+    "description": "Fast melee weapon with Tornado proc and run/walk bonus.",
+    "stats": [
+      "10% Chance to Cast Level 9 Tornado on Striking",
+      "+20% Faster Run/Walk",
+      "+40% Increased Attack Speed",
+      "+15% Faster Hit Recovery",
+      "+120-160% Enhanced Damage",
+      "-50% Target Defense",
+      "+50 to Attack Rating",
+      "Hit Blinds Target",
+      "+1 to Light Radius",
+      "Level 13 Twister (127 Charges)"
+    ]
+  },
+  {
+    "name": "Wisdom",
+    "runes": ["Pul", "Ith", "Eld"],
+    "types": ["Helms"],
+    "sockets": 3,
+    "requiredLevel": 45,
+    "description": "D2R-added Piercing Attack helm ideal for physical ranged builds.",
+    "stats": [
+      "+33% Piercing Attack",
+      "+15-25% Bonus to Attack Rating",
+      "4-8% Mana Stolen per Hit",
+      "+30% Enhanced Defense",
+      "+10 to Energy",
+      "Cannot be Frozen",
+      "15% Slower Stamina Drain",
+      "33% Better Chance of Getting Magic Items"
+    ]
+  },
+  {
+    "name": "Wrath",
+    "runes": ["Pul", "Lum", "Ber", "Mal"],
+    "types": ["Missile Weapons"],
+    "sockets": 4,
+    "requiredLevel": 63,
+    "description": "Elemental bow with Decrepify proc and high magic/lightning damage.",
+    "stats": [
+      "30% Chance to Cast Level 1 Decrepify on Striking",
+      "5% Chance to Cast Level 10 Life Tap on Striking",
+      "+375% Damage to Demons",
+      "+100 to Attack Rating Against Demons",
+      "Adds 83-333 Magic Damage",
+      "Adds 250-300 Fire Damage",
+      "-20% to Enemy Cold Resist",
+      "20% Deadly Strike",
+      "Prevent Monster Heal",
+      "+10 to Energy"
+    ]
+  },
+  {
+    "name": "Zephyr",
+    "runes": ["Ort", "Eth"],
+    "types": ["Missile Weapons"],
+    "sockets": 2,
+    "requiredLevel": 21,
+    "description": "Early bow runeword with enhanced damage, pierce, and run/walk bonus.",
+    "stats": [
+      "+33% Enhanced Damage",
+      "+66 to Attack Rating",
+      "Adds 1-50 Lightning Damage",
+      "-25% Target Defense",
+      "+25% Faster Run/Walk",
+      "+25 to Maximum Stamina",
+      "Level 1 Twister (50 Charges)"
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-.PHONY: dev down build logs clean
+.PHONY: dev down build logs clean validate-data
 
 dev:
 	docker compose up --build
@@ -15,3 +15,6 @@ logs:
 clean:
 	docker compose down
 	rm -rf frontend/node_modules frontend/dist
+
+validate-data:
+	node frontend/scripts/validate-runewords.mjs
