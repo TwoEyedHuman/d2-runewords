@@ -2,6 +2,7 @@ app = 'd2runes'
 primary_region = 'iad'
 
 [build]
+  dockerfile = "frontend/Dockerfile"
 
 [http_service]
   internal_port = 80
