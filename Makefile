@@ -1,4 +1,4 @@
-.PHONY: dev down build logs clean validate-data lint format
+.PHONY: dev down build logs clean validate-data lint format deploy fly-logs fly-status
 
 dev:
 	docker compose up -d --build
@@ -24,3 +24,12 @@ lint:
 
 format:
 	cd frontend && npm run format
+
+deploy:
+	fly deploy
+
+fly-logs:
+	fly logs
+
+fly-status:
+	fly status
