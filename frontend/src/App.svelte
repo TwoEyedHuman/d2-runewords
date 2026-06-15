@@ -12,7 +12,7 @@
   <section class="selector-section">
     <RuneSelector bind:selectedRunes />
   </section>
-  <RunewordList />
+  <RunewordList {selectedRunes} />
 </main>
 
 <style>

@@ -1,6 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import RunewordCard from './RunewordCard.svelte';
+  import { filterRunewords } from './filter.js';
+
+  export let selectedRunes = new Set();
 
   let runewords = [];
 
@@ -8,17 +11,19 @@
     const res = await fetch('/runewords.json');
     runewords = await res.json();
   });
+
+  $: filtered = filterRunewords(runewords, selectedRunes);
 </script>
 
 <section class="runeword-list">
   <div class="list-header">
     <h2>Runewords</h2>
     {#if runewords.length > 0}
-      <span class="count">{runewords.length} total</span>
+      <span class="count">{filtered.length} of {runewords.length}</span>
     {/if}
   </div>
   <div class="grid">
-    {#each runewords as runeword (runeword.name)}
+    {#each filtered as runeword (runeword.name)}
       <RunewordCard {runeword} />
     {/each}
   </div>
