@@ -1,5 +1,6 @@
 <script>
   import RuneSelector from './lib/RuneSelector.svelte';
+  import RunewordList from './lib/RunewordList.svelte';
 
   let selectedRunes = new Set();
 </script>
@@ -11,6 +12,7 @@
   <section class="selector-section">
     <RuneSelector bind:selectedRunes />
   </section>
+  <RunewordList />
 </main>
 
 <style>
