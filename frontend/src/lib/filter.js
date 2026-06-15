@@ -5,7 +5,5 @@
  */
 export function filterRunewords(runewords, selectedRunes) {
   if (selectedRunes.size === 0) return runewords;
-  return runewords.filter(rw =>
-    rw.runes.every(r => selectedRunes.has(r))
-  );
+  return runewords.filter((rw) => rw.runes.every((r) => selectedRunes.has(r)));
 }

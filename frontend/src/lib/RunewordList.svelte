@@ -17,16 +17,22 @@
 
 <section class="runeword-list">
   <div class="list-header">
-    <h2>Runewords</h2>
+    <h2>Rune Words</h2>
     {#if runewords.length > 0}
-      <span class="count">{filtered.length} of {runewords.length}</span>
+      <span class="match-count">
+        Showing {filtered.length} of {runewords.length} rune words
+      </span>
     {/if}
   </div>
-  <div class="grid">
-    {#each filtered as runeword (runeword.name)}
-      <RunewordCard {runeword} />
-    {/each}
-  </div>
+  {#if filtered.length === 0 && runewords.length > 0}
+    <p class="empty-state">No rune words match the selected runes.</p>
+  {:else}
+    <div class="grid">
+      {#each filtered as runeword (runeword.name)}
+        <RunewordCard {runeword} />
+      {/each}
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -38,25 +44,43 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     margin-bottom: 16px;
+    flex-wrap: wrap;
   }
 
   h2 {
     margin: 0;
-    font-size: 14px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #8a7040;
+    color: var(--d2-gold-dim);
   }
 
-  .count {
+  .match-count {
     font-size: 11px;
-    color: #6b5a30;
+    color: var(--d2-text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .empty-state {
+    margin: 48px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--d2-text-muted);
+    font-style: italic;
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

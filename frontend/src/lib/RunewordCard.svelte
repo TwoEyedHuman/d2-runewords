@@ -32,13 +32,18 @@
 
 <style>
   .runeword-card {
-    background: rgba(20, 16, 8, 0.8);
-    border: 1px solid #3a3020;
+    background: var(--d2-surface);
+    border: 1px solid var(--d2-border);
     border-radius: 6px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    transition: border-color 0.15s;
+  }
+
+  .runeword-card:hover {
+    border-color: var(--d2-border-light);
   }
 
   .card-header {
@@ -50,16 +55,18 @@
 
   .name {
     margin: 0;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #c8a84b;
+    color: var(--d2-gold);
   }
 
   .sockets {
     font-size: 11px;
-    color: #6b5a30;
+    color: var(--d2-text-muted);
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .runes {
@@ -71,14 +78,15 @@
   .meta {
     display: flex;
     justify-content: space-between;
+    gap: 8px;
     font-size: 11px;
-    color: #8a7040;
+    color: var(--d2-gold-dim);
   }
 
   .description {
     margin: 0;
     font-size: 12px;
-    color: #7a6a50;
+    color: var(--d2-text-muted);
     font-style: italic;
     line-height: 1.5;
   }
@@ -90,19 +98,22 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
+    border-top: 1px solid var(--d2-border);
+    padding-top: 10px;
   }
 
   .stats li {
     font-size: 12px;
-    color: #a89060;
-    padding-left: 10px;
+    color: var(--d2-text);
+    padding-left: 12px;
     position: relative;
+    line-height: 1.4;
   }
 
   .stats li::before {
     content: '•';
     position: absolute;
     left: 0;
-    color: #6b5a30;
+    color: var(--d2-gold-dark);
   }
 </style>
