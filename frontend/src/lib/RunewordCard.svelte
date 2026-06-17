@@ -17,13 +17,7 @@
           <div class="cube-chain" title={slot.cubePath}>
             {#each slot.cubeSources as source, i}
               {#if i > 0}<span class="cube-plus">+</span>{/if}
-              <RuneIcon
-                rune={source.rune}
-                count={source.count}
-                tone="cube"
-                compact
-                interactive={false}
-              />
+              <RuneIcon rune={source.rune} count={source.count} tone="cube" interactive={false} />
             {/each}
             <span class="cube-arrow">→</span>
           </div>

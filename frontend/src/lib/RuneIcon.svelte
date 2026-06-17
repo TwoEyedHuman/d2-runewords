@@ -3,7 +3,6 @@
   export let count = 0;
   export let pressing = false;
   export let tone = 'gold';
-  export let compact = false;
   export let interactive = true;
 </script>
 
@@ -13,7 +12,6 @@
   class:active={count > 0}
   class:pressing
   class:cube={tone === 'cube'}
-  class:compact
   on:click
   on:pointerdown
   on:pointerup
@@ -107,26 +105,6 @@
 
   .rune-icon.cube .badge {
     color: #e0594a;
-  }
-
-  .rune-icon.compact {
-    padding: 4px 3px;
-    gap: 2px;
-  }
-
-  .rune-icon.compact img {
-    width: 18px;
-    height: 18px;
-  }
-
-  .rune-icon.compact .rune-name {
-    font-size: 7px;
-  }
-
-  .rune-icon.compact .badge {
-    font-size: 8px;
-    top: 0;
-    right: 1px;
   }
 
   .rune-name {
