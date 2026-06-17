@@ -13,6 +13,17 @@ function makeOwned(entries) {
   return owned;
 }
 
+const TWO_RUNE_UPGRADE_START = RUNE_ORDER.indexOf('Pul');
+
+// Mirrors cube.js's ratioAt: 3:1 below Pul, 2:1 from Pul onward.
+function neededRawRunes(targetIndex) {
+  let total = 1;
+  for (let i = targetIndex - 1; i >= 0; i--) {
+    total *= i >= TWO_RUNE_UPGRADE_START ? 2 : 3;
+  }
+  return total;
+}
+
 describe('computeEffectiveCounts', () => {
   it('returns all zero for zero inventory', () => {
     const effective = computeEffectiveCounts(makeOwned([]));
@@ -51,15 +62,26 @@ describe('computeEffectiveCounts', () => {
 
   it('cubes a high rune (Ber) all the way up from enough El', () => {
     const berIndex = RUNE_ORDER.indexOf('Ber');
-    const needed = CUBE_RATIO_POW(berIndex);
+    const needed = neededRawRunes(berIndex);
     const effective = computeEffectiveCounts(makeOwned([['El', needed]]));
     expect(effective.get('Ber')).toBeGreaterThanOrEqual(1);
   });
-});
 
-function CUBE_RATIO_POW(steps) {
-  return 3 ** steps;
-}
+  it('only needs 2 Pul to cube up to 1 Um', () => {
+    const effective = computeEffectiveCounts(makeOwned([['Pul', 2]]));
+    expect(effective.get('Um')).toBe(1);
+  });
+
+  it('1 Pul is not enough to cube up to 1 Um', () => {
+    const effective = computeEffectiveCounts(makeOwned([['Pul', 1]]));
+    expect(effective.get('Um')).toBe(0);
+  });
+
+  it('only needs 2 Cham to cube up to 1 Zod', () => {
+    const effective = computeEffectiveCounts(makeOwned([['Cham', 2]]));
+    expect(effective.get('Zod')).toBe(1);
+  });
+});
 
 describe('getCubePath', () => {
   it('returns null when user already has enough raw runes', () => {
@@ -95,10 +117,18 @@ describe('getCubePath', () => {
 
   it('cubes a high rune (Ber) all the way up from enough El', () => {
     const berIndex = RUNE_ORDER.indexOf('Ber');
-    const needed = 3 ** berIndex;
+    const needed = neededRawRunes(berIndex);
     const path = getCubePath('Ber', makeOwned([['El', needed]]));
     expect(path).toMatch(/→ Ber$/);
     expect(path).toContain('El^');
+  });
+
+  it('returns "Pul^2 → Um" for 2 Pul', () => {
+    expect(getCubePath('Um', makeOwned([['Pul', 2]]))).toBe('Pul^2 → Um');
+  });
+
+  it('returns "Cham^2 → Zod" for 2 Cham', () => {
+    expect(getCubePath('Zod', makeOwned([['Cham', 2]]))).toBe('Cham^2 → Zod');
   });
 });
 
@@ -160,11 +190,12 @@ describe('resolveRuneword', () => {
 
   it('resolves duplicate-rune slots independently — one direct, one cubed', () => {
     // Bone-style recipe needing 2x Um: 1 owned directly, the second only
-    // reachable via cubing 3 Pul. Each Um slot must report its own truth,
-    // not a blended aggregate of "1 direct + 1 cubed" applied to both.
+    // reachable via cubing 2 Pul (Pul->Um is a 2:1 upgrade). Each Um slot
+    // must report its own truth, not a blended aggregate of "1 direct +
+    // 1 cubed" applied to both.
     const owned = makeOwned([
       ['Um', 1],
-      ['Pul', 3],
+      ['Pul', 2],
     ]);
     const resolved = resolveRuneword(['Um', 'Um'], owned);
     const slots = resolved.get('Um');
@@ -172,8 +203,8 @@ describe('resolveRuneword', () => {
     expect(slots[0]).toEqual({ status: 'direct', cubePath: null, cubeSources: null });
     expect(slots[1]).toEqual({
       status: 'cubed',
-      cubePath: 'Pul^3 → Um',
-      cubeSources: [{ rune: 'Pul', count: 3 }],
+      cubePath: 'Pul^2 → Um',
+      cubeSources: [{ rune: 'Pul', count: 2 }],
     });
   });
 });

@@ -34,7 +34,19 @@ export const RUNE_ORDER = [
   'Zod',
 ];
 
-const CUBE_RATIO = 3;
+const TWO_RUNE_UPGRADE_START = RUNE_ORDER.indexOf('Pul');
+
+/**
+ * Number of RUNE_ORDER[idx] needed in the Horadric Cube to produce one
+ * RUNE_ORDER[idx + 1]. Standard recipe is 3:1; from Pul onward Blizzard
+ * changed the high-rune upgrades to 2:1 (2 Pul -> Um, 2 Ist -> Gul, etc).
+ *
+ * @param {number} idx
+ * @returns {number}
+ */
+function ratioAt(idx) {
+  return idx >= TWO_RUNE_UPGRADE_START ? 2 : 3;
+}
 
 /**
  * @param {Map<string, number>} owned
@@ -43,10 +55,11 @@ const CUBE_RATIO = 3;
 export function computeEffectiveCounts(owned) {
   const effective = new Map();
   let carry = 0;
-  for (const rune of RUNE_ORDER) {
+  for (let i = 0; i < RUNE_ORDER.length; i++) {
+    const rune = RUNE_ORDER[i];
     const value = (owned.get(rune) ?? 0) + carry;
     effective.set(rune, value);
-    carry = Math.floor(value / CUBE_RATIO);
+    carry = Math.floor(value / ratioAt(i));
   }
   return effective;
 }
@@ -76,8 +89,9 @@ export function getCubePath(rune, owned) {
     if (takeDirect > 0) {
       contributions.set(runeAtIdx, (contributions.get(runeAtIdx) ?? 0) + takeDirect);
     }
-    need = (need - takeDirect) * CUBE_RATIO;
+    const remainder = need - takeDirect;
     idx -= 1;
+    need = remainder > 0 ? remainder * ratioAt(idx) : 0;
   }
 
   const parts = RUNE_ORDER.filter((r) => contributions.has(r)).map(
@@ -156,8 +170,9 @@ export function resolveRuneword(runes, owned) {
         if (takeDirect > 0) {
           contributions.set(runeAtIdx, (contributions.get(runeAtIdx) ?? 0) + takeDirect);
         }
-        need = (need - takeDirect) * CUBE_RATIO;
+        const remainder = need - takeDirect;
         idx -= 1;
+        need = remainder > 0 ? remainder * ratioAt(idx) : 0;
       }
 
       for (const [sourceRune, used] of contributions) {

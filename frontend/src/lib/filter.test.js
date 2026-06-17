@@ -139,13 +139,13 @@ describe('filterRunewords', () => {
 
   it('gives each instance of a duplicated rune its own direct/cubed status', () => {
     // Bone-style recipe needing 2x Um: 1 owned directly, the second only
-    // reachable via cubing 3 Pul. Only one Um slot should show a cube
-    // cluster — the other already has its rune.
+    // reachable via cubing 2 Pul (Pul->Um is a 2:1 upgrade). Only one Um
+    // slot should show a cube cluster — the other already has its rune.
     const bone = { name: 'Bone', runes: ['Sol', 'Um', 'Um'] };
     const ownedMap = owned([
       ['Ort', 9],
       ['Amn', 2],
-      ['Pul', 3],
+      ['Pul', 2],
       ['Um', 1],
     ]);
     const result = filterRunewords([bone], ownedMap);
@@ -154,7 +154,7 @@ describe('filterRunewords', () => {
     const umSlots = result[0].runeSlots.filter((s) => s.rune === 'Um');
     expect(umSlots).toEqual([
       { rune: 'Um', cubePath: null, cubeSources: null },
-      { rune: 'Um', cubePath: 'Pul^3 → Um', cubeSources: [{ rune: 'Pul', count: 3 }] },
+      { rune: 'Um', cubePath: 'Pul^2 → Um', cubeSources: [{ rune: 'Pul', count: 2 }] },
     ]);
   });
 });
