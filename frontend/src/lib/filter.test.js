@@ -22,14 +22,16 @@ function direct(rw) {
 
 function withResolved(rw, classification, ownedMap) {
   const resolved = resolveRuneword(rw.runes, ownedMap);
+  const nextIndex = new Map();
   return {
     ...rw,
     classification,
-    runeSlots: rw.runes.map((rune) => ({
-      rune,
-      cubePath: resolved.get(rune).cubePath,
-      cubeSources: resolved.get(rune).cubeSources,
-    })),
+    runeSlots: rw.runes.map((rune) => {
+      const i = nextIndex.get(rune) ?? 0;
+      nextIndex.set(rune, i + 1);
+      const slot = resolved.get(rune)[i];
+      return { rune, cubePath: slot.cubePath, cubeSources: slot.cubeSources };
+    }),
   };
 }
 
@@ -132,6 +134,27 @@ describe('filterRunewords', () => {
     expect(result).toEqual([
       direct(runewords[0]),
       withResolved(runewords[1], 'partial-cube', ownedMap),
+    ]);
+  });
+
+  it('gives each instance of a duplicated rune its own direct/cubed status', () => {
+    // Bone-style recipe needing 2x Um: 1 owned directly, the second only
+    // reachable via cubing 3 Pul. Only one Um slot should show a cube
+    // cluster — the other already has its rune.
+    const bone = { name: 'Bone', runes: ['Sol', 'Um', 'Um'] };
+    const ownedMap = owned([
+      ['Ort', 9],
+      ['Amn', 2],
+      ['Pul', 3],
+      ['Um', 1],
+    ]);
+    const result = filterRunewords([bone], ownedMap);
+    expect(result).toEqual([withResolved(bone, 'partial-cube', ownedMap)]);
+
+    const umSlots = result[0].runeSlots.filter((s) => s.rune === 'Um');
+    expect(umSlots).toEqual([
+      { rune: 'Um', cubePath: null, cubeSources: null },
+      { rune: 'Um', cubePath: 'Pul^3 → Um', cubeSources: [{ rune: 'Pul', count: 3 }] },
     ]);
   });
 });

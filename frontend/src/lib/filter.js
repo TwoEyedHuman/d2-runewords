@@ -21,16 +21,18 @@ export function filterRunewords(runewords, owned) {
       const resolved = resolveRuneword(rw.runes, owned);
       if (resolved === null) return null;
 
-      const statuses = [...resolved.values()].map((slot) => slot.status);
+      const statuses = [...resolved.values()].flatMap((slots) => slots.map((s) => s.status));
       const allDirect = statuses.every((s) => s === 'direct');
       const allCubed = statuses.every((s) => s === 'cubed');
       const classification = allDirect ? 'direct' : allCubed ? 'full-cube' : 'partial-cube';
 
-      const runeSlots = rw.runes.map((rune) => ({
-        rune,
-        cubePath: resolved.get(rune).cubePath,
-        cubeSources: resolved.get(rune).cubeSources,
-      }));
+      const nextIndex = new Map();
+      const runeSlots = rw.runes.map((rune) => {
+        const i = nextIndex.get(rune) ?? 0;
+        nextIndex.set(rune, i + 1);
+        const slot = resolved.get(rune)[i];
+        return { rune, cubePath: slot.cubePath, cubeSources: slot.cubeSources };
+      });
 
       return { ...rw, classification, runeSlots };
     })

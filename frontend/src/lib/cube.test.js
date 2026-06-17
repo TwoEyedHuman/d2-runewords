@@ -125,8 +125,8 @@ describe('resolveRuneword', () => {
         ['Eth', 1],
       ]),
     );
-    expect(resolved.get('El').status).toBe('direct');
-    expect(resolved.get('Eth').status).toBe('direct');
+    expect(resolved.get('El')[0].status).toBe('direct');
+    expect(resolved.get('Eth')[0].status).toBe('direct');
   });
 
   it("does not let a rune satisfy both its own direct slot and another slot's cube-up", () => {
@@ -146,15 +146,34 @@ describe('resolveRuneword', () => {
       ['Eth', 4],
     ]);
     const resolved = resolveRuneword(['Ith', 'El', 'Eth'], owned);
-    expect(resolved.get('Eth').status).toBe('direct');
-    expect(resolved.get('El').status).toBe('direct');
-    expect(resolved.get('Ith').status).toBe('cubed');
-    expect(resolved.get('Ith').cubePath).toBe('Eth^3 → Ith');
+    expect(resolved.get('Eth')[0].status).toBe('direct');
+    expect(resolved.get('El')[0].status).toBe('direct');
+    expect(resolved.get('Ith')[0].status).toBe('cubed');
+    expect(resolved.get('Ith')[0].cubePath).toBe('Eth^3 → Ith');
   });
 
   it('does not mutate the owned map passed in', () => {
     const owned = makeOwned([['Eth', 4]]);
     resolveRuneword(['Ith'], owned);
     expect(owned.get('Eth')).toBe(4);
+  });
+
+  it('resolves duplicate-rune slots independently — one direct, one cubed', () => {
+    // Bone-style recipe needing 2x Um: 1 owned directly, the second only
+    // reachable via cubing 3 Pul. Each Um slot must report its own truth,
+    // not a blended aggregate of "1 direct + 1 cubed" applied to both.
+    const owned = makeOwned([
+      ['Um', 1],
+      ['Pul', 3],
+    ]);
+    const resolved = resolveRuneword(['Um', 'Um'], owned);
+    const slots = resolved.get('Um');
+    expect(slots).toHaveLength(2);
+    expect(slots[0]).toEqual({ status: 'direct', cubePath: null, cubeSources: null });
+    expect(slots[1]).toEqual({
+      status: 'cubed',
+      cubePath: 'Pul^3 → Um',
+      cubeSources: [{ rune: 'Pul', count: 3 }],
+    });
   });
 });

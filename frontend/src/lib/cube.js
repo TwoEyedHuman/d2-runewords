@@ -110,13 +110,21 @@ export function classifyRuneSlot(rune, requiredCount, owned) {
  * higher-tier slot can draw from several tiers below it — so the
  * constrained slot must claim its share before the flexible one.
  *
+ * Each rune that appears more than once in the recipe (e.g. 2x Um) is
+ * resolved one unit at a time rather than as a single batch of N, because
+ * the batch can be a mix — one unit covered by an owned rune, the next
+ * only reachable by cubing. Resolving unit-by-unit lets each slot instance
+ * report its own true status instead of an aggregate that doesn't belong
+ * to any single slot.
+ *
  * @param {string[]} runes - one entry per slot, duplicates allowed
  * @param {Map<string, number>} owned
- * @returns {Map<string, {
+ * @returns {Map<string, Array<{
  *   status: 'direct' | 'cubed',
  *   cubePath: string | null,
  *   cubeSources: Array<{ rune: string, count: number }> | null,
- * }> | null} null when the recipe is not buildable even with cubing
+ * }>> | null} one entry per slot instance of that rune, in resolution
+ *   order; null when the recipe is not buildable even with cubing
  */
 export function resolveRuneword(runes, owned) {
   const required = new Map();
@@ -133,40 +141,46 @@ export function resolveRuneword(runes, owned) {
 
   for (const rune of ascendingRunes) {
     const requiredCount = required.get(rune);
-    const contributions = new Map();
-    let need = requiredCount;
-    let idx = RUNE_ORDER.indexOf(rune);
+    const slots = [];
 
-    while (need > 0) {
-      if (idx < 0) return null;
-      const runeAtIdx = RUNE_ORDER[idx];
-      const availableHere = remaining.get(runeAtIdx) ?? 0;
-      const takeDirect = Math.min(availableHere, need);
-      if (takeDirect > 0) {
-        contributions.set(runeAtIdx, (contributions.get(runeAtIdx) ?? 0) + takeDirect);
+    for (let unit = 0; unit < requiredCount; unit++) {
+      const contributions = new Map();
+      let need = 1;
+      let idx = RUNE_ORDER.indexOf(rune);
+
+      while (need > 0) {
+        if (idx < 0) return null;
+        const runeAtIdx = RUNE_ORDER[idx];
+        const availableHere = remaining.get(runeAtIdx) ?? 0;
+        const takeDirect = Math.min(availableHere, need);
+        if (takeDirect > 0) {
+          contributions.set(runeAtIdx, (contributions.get(runeAtIdx) ?? 0) + takeDirect);
+        }
+        need = (need - takeDirect) * CUBE_RATIO;
+        idx -= 1;
       }
-      need = (need - takeDirect) * CUBE_RATIO;
-      idx -= 1;
+
+      for (const [sourceRune, used] of contributions) {
+        remaining.set(sourceRune, (remaining.get(sourceRune) ?? 0) - used);
+      }
+
+      const isDirect = contributions.size === 1 && contributions.get(rune) === 1;
+      const cubePath = isDirect
+        ? null
+        : `${RUNE_ORDER.filter((r) => contributions.has(r))
+            .map((r) => `${r}^${formatCount(contributions.get(r))}`)
+            .join(' + ')} → ${rune}`;
+      const cubeSources = isDirect
+        ? null
+        : RUNE_ORDER.filter((r) => r !== rune && contributions.has(r)).map((r) => ({
+            rune: r,
+            count: contributions.get(r),
+          }));
+
+      slots.push({ status: isDirect ? 'direct' : 'cubed', cubePath, cubeSources });
     }
 
-    for (const [sourceRune, used] of contributions) {
-      remaining.set(sourceRune, (remaining.get(sourceRune) ?? 0) - used);
-    }
-
-    const isDirect = contributions.size === 1 && contributions.get(rune) === requiredCount;
-    const cubePath = isDirect
-      ? null
-      : `${RUNE_ORDER.filter((r) => contributions.has(r))
-          .map((r) => `${r}^${formatCount(contributions.get(r))}`)
-          .join(' + ')} → ${rune}`;
-    const cubeSources = isDirect
-      ? null
-      : RUNE_ORDER.filter((r) => r !== rune && contributions.has(r)).map((r) => ({
-          rune: r,
-          count: contributions.get(r),
-        }));
-
-    result.set(rune, { status: isDirect ? 'direct' : 'cubed', cubePath, cubeSources });
+    result.set(rune, slots);
   }
 
   return result;
