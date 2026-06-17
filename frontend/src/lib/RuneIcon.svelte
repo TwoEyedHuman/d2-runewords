@@ -91,7 +91,7 @@
 
   .rune-icon.cube {
     border-style: dashed;
-    border-color: rgba(192, 57, 43, 0.5);
+    border-color: var(--d2-gold-dark);
     background: transparent;
   }
 
@@ -100,11 +100,11 @@
   }
 
   .rune-icon.cube .rune-name {
-    color: #b05248;
+    color: var(--d2-gold-dim);
   }
 
   .rune-icon.cube .badge {
-    color: #c0392b;
+    color: var(--d2-gold-dim);
   }
 
   .rune-name {

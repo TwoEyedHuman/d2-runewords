@@ -92,19 +92,19 @@
     gap: 4px;
     margin-left: 12px;
     padding: 4px;
-    border: 1px dashed rgba(192, 57, 43, 0.4);
+    border: 1px dashed var(--d2-gold-dark);
     border-radius: 6px;
   }
 
   .cube-plus {
     font-size: 10px;
     font-weight: 700;
-    color: #c0392b;
+    color: var(--d2-gold-dim);
   }
 
   .cube-glyph {
     font-size: 12px;
-    color: #c0392b;
+    color: var(--d2-gold-dim);
   }
 
   @media (max-width: 480px) {
