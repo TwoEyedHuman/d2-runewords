@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { RUNE_ORDER, computeEffectiveCounts, getCubePath, classifyRuneSlot } from './cube.js';
+import {
+  RUNE_ORDER,
+  computeEffectiveCounts,
+  getCubePath,
+  classifyRuneSlot,
+  resolveRuneword,
+} from './cube.js';
 
 function makeOwned(entries) {
   const owned = new Map(RUNE_ORDER.map((r) => [r, 0]));
@@ -107,5 +113,48 @@ describe('classifyRuneSlot', () => {
 
   it('classifies unavailable when even full cube-up falls short', () => {
     expect(classifyRuneSlot('Tir', 1, makeOwned([['El', 3]]))).toBe('unavailable');
+  });
+});
+
+describe('resolveRuneword', () => {
+  it('classifies each slot direct when raw counts cover every slot', () => {
+    const resolved = resolveRuneword(
+      ['El', 'Eth'],
+      makeOwned([
+        ['El', 1],
+        ['Eth', 1],
+      ]),
+    );
+    expect(resolved.get('El').status).toBe('direct');
+    expect(resolved.get('Eth').status).toBe('direct');
+  });
+
+  it("does not let a rune satisfy both its own direct slot and another slot's cube-up", () => {
+    // Malice: Ith, El, Eth. 1 El + 3 Eth looks enough in isolation (3 Eth
+    // cubes to 1 Ith), but those same 3 Eth are also the recipe's own Eth
+    // slot — spending them on Ith leaves nothing for the direct Eth slot.
+    const owned = makeOwned([
+      ['El', 1],
+      ['Eth', 3],
+    ]);
+    expect(resolveRuneword(['Ith', 'El', 'Eth'], owned)).toBeNull();
+  });
+
+  it('still allows cubing when there is enough Eth for both the direct slot and the cube-up', () => {
+    const owned = makeOwned([
+      ['El', 1],
+      ['Eth', 4],
+    ]);
+    const resolved = resolveRuneword(['Ith', 'El', 'Eth'], owned);
+    expect(resolved.get('Eth').status).toBe('direct');
+    expect(resolved.get('El').status).toBe('direct');
+    expect(resolved.get('Ith').status).toBe('cubed');
+    expect(resolved.get('Ith').cubePath).toBe('Eth^3 → Ith');
+  });
+
+  it('does not mutate the owned map passed in', () => {
+    const owned = makeOwned([['Eth', 4]]);
+    resolveRuneword(['Ith'], owned);
+    expect(owned.get('Eth')).toBe(4);
   });
 });

@@ -70,7 +70,9 @@ describe('filterRunewords', () => {
   it('classifies full-cube when every slot is satisfied only via cubing', () => {
     const talIndex = RUNE_ORDER.indexOf('Tal');
     const ethIndex = RUNE_ORDER.indexOf('Eth');
-    const needed = 3 ** Math.max(talIndex, ethIndex);
+    // Enough El for both cube-up chains independently — they share the same
+    // El pool, so it must cover the sum, not just the larger one.
+    const needed = 3 ** talIndex + 3 ** ethIndex;
     const ownedMap = owned([['El', needed]]);
     const result = filterRunewords([runewords[1]], ownedMap);
     expect(result).toEqual([withCubePaths(runewords[1], 'full-cube', ownedMap)]);
@@ -97,6 +99,20 @@ describe('filterRunewords', () => {
         ]),
       ),
     ).toEqual([]);
+  });
+
+  it('excludes a recipe when cubing one slot would exhaust runes another slot needs directly', () => {
+    // Malice-style recipe: Ith, El, Eth. 3 Eth could cube to 1 Ith, but
+    // those same Eth are also required directly — can't do both at once.
+    const malice = { name: 'Malice', runes: ['Ith', 'El', 'Eth'] };
+    const result = filterRunewords(
+      [malice],
+      owned([
+        ['El', 1],
+        ['Eth', 3],
+      ]),
+    );
+    expect(result).toEqual([]);
   });
 
   it('mixed inventories: direct, partial-cube, and excluded runewords coexist', () => {
