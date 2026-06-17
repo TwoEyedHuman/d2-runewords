@@ -1,4 +1,4 @@
-import { computeEffectiveCounts, classifyRuneSlot } from './cube.js';
+import { computeEffectiveCounts, classifyRuneSlot, getCubePath } from './cube.js';
 
 /**
  * @param {Array} runewords
@@ -9,7 +9,11 @@ export function filterRunewords(runewords, owned) {
   const effective = computeEffectiveCounts(owned);
   const hasAny = [...effective.values()].some((v) => v > 0);
   if (!hasAny) {
-    return runewords.map((rw) => ({ ...rw, classification: 'direct' }));
+    return runewords.map((rw) => ({
+      ...rw,
+      classification: 'direct',
+      runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null })),
+    }));
   }
 
   return runewords
@@ -29,7 +33,9 @@ export function filterRunewords(runewords, owned) {
       const allCubed = slotClassifications.every((c) => c === 'cubed');
       const classification = allDirect ? 'direct' : allCubed ? 'full-cube' : 'partial-cube';
 
-      return { ...rw, classification };
+      const runeSlots = rw.runes.map((rune) => ({ rune, cubePath: getCubePath(rune, owned) }));
+
+      return { ...rw, classification, runeSlots };
     })
     .filter((rw) => rw !== null);
 }

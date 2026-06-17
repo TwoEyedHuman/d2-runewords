@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { filterRunewords } from './filter.js';
-import { RUNE_ORDER } from './cube.js';
+import { RUNE_ORDER, getCubePath } from './cube.js';
 
 const runewords = [
   { name: 'Spirit', runes: ['Tal', 'Thul', 'Ort', 'Amn'] },
@@ -13,7 +13,19 @@ function owned(entries) {
 }
 
 function direct(rw) {
-  return { ...rw, classification: 'direct' };
+  return {
+    ...rw,
+    classification: 'direct',
+    runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null })),
+  };
+}
+
+function withCubePaths(rw, classification, ownedMap) {
+  return {
+    ...rw,
+    classification,
+    runeSlots: rw.runes.map((rune) => ({ rune, cubePath: getCubePath(rune, ownedMap) })),
+  };
 }
 
 describe('filterRunewords', () => {
@@ -59,21 +71,20 @@ describe('filterRunewords', () => {
     const talIndex = RUNE_ORDER.indexOf('Tal');
     const ethIndex = RUNE_ORDER.indexOf('Eth');
     const needed = 3 ** Math.max(talIndex, ethIndex);
-    const result = filterRunewords([runewords[1]], owned([['El', needed]]));
-    expect(result).toEqual([{ ...runewords[1], classification: 'full-cube' }]);
+    const ownedMap = owned([['El', needed]]);
+    const result = filterRunewords([runewords[1]], ownedMap);
+    expect(result).toEqual([withCubePaths(runewords[1], 'full-cube', ownedMap)]);
   });
 
   it('classifies partial-cube when some slots are direct and some are cubed', () => {
     const ethIndex = RUNE_ORDER.indexOf('Eth');
     const needed = 3 ** ethIndex;
-    const result = filterRunewords(
-      [runewords[1]],
-      owned([
-        ['Tal', 1],
-        ['El', needed],
-      ]),
-    );
-    expect(result).toEqual([{ ...runewords[1], classification: 'partial-cube' }]);
+    const ownedMap = owned([
+      ['Tal', 1],
+      ['El', needed],
+    ]);
+    const result = filterRunewords([runewords[1]], ownedMap);
+    expect(result).toEqual([withCubePaths(runewords[1], 'partial-cube', ownedMap)]);
   });
 
   it('excludes a runeword when a slot is unavailable even via cubing', () => {
@@ -89,19 +100,17 @@ describe('filterRunewords', () => {
   });
 
   it('mixed inventories: direct, partial-cube, and excluded runewords coexist', () => {
-    const result = filterRunewords(
-      runewords,
-      owned([
-        ['Tal', 5],
-        ['Thul', 2],
-        ['Ort', 2],
-        ['Amn', 2],
-        ['El', 81],
-      ]),
-    );
+    const ownedMap = owned([
+      ['Tal', 5],
+      ['Thul', 2],
+      ['Ort', 2],
+      ['Amn', 2],
+      ['El', 81],
+    ]);
+    const result = filterRunewords(runewords, ownedMap);
     expect(result).toEqual([
       direct(runewords[0]),
-      { ...runewords[1], classification: 'partial-cube' },
+      withCubePaths(runewords[1], 'partial-cube', ownedMap),
     ]);
   });
 });

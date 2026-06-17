@@ -11,8 +11,13 @@
   </div>
 
   <div class="runes">
-    {#each runeword.runes as rune}
-      <RuneIcon {rune} />
+    {#each runeword.runeSlots ?? runeword.runes.map((rune) => ({ rune, cubePath: null })) as slot}
+      <div class="rune-slot">
+        <RuneIcon rune={slot.rune} />
+        {#if slot.cubePath}
+          <span class="cube-path">{slot.cubePath}</span>
+        {/if}
+      </div>
     {/each}
   </div>
 
@@ -73,6 +78,29 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+  }
+
+  .rune-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .cube-path {
+    font-size: 9px;
+    font-family: monospace;
+    color: var(--d2-text-muted);
+    text-align: center;
+    max-width: 80px;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 480px) {
+    .cube-path {
+      font-size: 8px;
+      max-width: 56px;
+    }
   }
 
   .meta {
