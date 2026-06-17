@@ -3,17 +3,62 @@
   import { runeCounts } from './store.js';
 
   const ALL_RUNES = [
-    'El', 'Eld', 'Tir', 'Nef', 'Eth', 'Ith', 'Tal', 'Ral', 'Ort', 'Thul',
-    'Amn', 'Sol', 'Shael', 'Dol', 'Hel', 'Io', 'Lum', 'Ko', 'Fal', 'Lem',
-    'Pul', 'Um', 'Mal', 'Ist', 'Gul', 'Vex', 'Ohm', 'Lo', 'Sur', 'Ber',
-    'Jah', 'Cham', 'Zod',
+    'El',
+    'Eld',
+    'Tir',
+    'Nef',
+    'Eth',
+    'Ith',
+    'Tal',
+    'Ral',
+    'Ort',
+    'Thul',
+    'Amn',
+    'Sol',
+    'Shael',
+    'Dol',
+    'Hel',
+    'Io',
+    'Lum',
+    'Ko',
+    'Fal',
+    'Lem',
+    'Pul',
+    'Um',
+    'Mal',
+    'Ist',
+    'Gul',
+    'Vex',
+    'Ohm',
+    'Lo',
+    'Sur',
+    'Ber',
+    'Jah',
+    'Cham',
+    'Zod',
   ];
 
   let pressingRune = null;
   let pressTimer = null;
   let longPressTriggered = false;
+  let savedVisible = false;
+  let savedTimer = null;
+  let firstRun = true;
 
   $: totalCount = [...$runeCounts.values()].reduce((a, b) => a + b, 0);
+
+  $: {
+    $runeCounts;
+    if (firstRun) {
+      firstRun = false;
+    } else {
+      savedVisible = true;
+      clearTimeout(savedTimer);
+      savedTimer = setTimeout(() => {
+        savedVisible = false;
+      }, 1200);
+    }
+  }
 
   function handlePointerDown(rune, e) {
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -47,6 +92,7 @@
 <div class="rune-selector">
   <div class="selector-header">
     <h2>Select Runes</h2>
+    <span class="saved-indicator" class:visible={savedVisible}>Saved</span>
     {#if totalCount > 0}
       <button class="clear-btn" on:click={() => runeCounts.resetAll()}>
         Clear All ({totalCount})
@@ -77,7 +123,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     margin-bottom: 12px;
+  }
+
+  .saved-indicator {
+    margin-right: auto;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--d2-gold-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .saved-indicator.visible {
+    opacity: 1;
   }
 
   h2 {
