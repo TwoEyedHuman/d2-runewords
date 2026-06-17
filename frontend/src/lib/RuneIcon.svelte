@@ -90,21 +90,21 @@
   }
 
   .rune-icon.cube {
-    border-color: #c0392b;
-    background: rgba(192, 57, 43, 0.1);
+    border-style: dashed;
+    border-color: rgba(192, 57, 43, 0.5);
+    background: transparent;
   }
 
   .rune-icon.cube img {
-    opacity: 1;
-    filter: drop-shadow(0 0 4px rgba(192, 57, 43, 0.7));
+    opacity: 0.55;
   }
 
   .rune-icon.cube .rune-name {
-    color: #d9665a;
+    color: #b05248;
   }
 
   .rune-icon.cube .badge {
-    color: #e0594a;
+    color: #c0392b;
   }
 
   .rune-name {
