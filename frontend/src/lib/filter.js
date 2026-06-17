@@ -1,9 +1,20 @@
 /**
  * @param {Array} runewords
- * @param {Set<string>} selectedRunes
+ * @param {Map<string, number>} runeCounts
  * @returns {Array}
  */
-export function filterRunewords(runewords, selectedRunes) {
-  if (selectedRunes.size === 0) return runewords;
-  return runewords.filter((rw) => rw.runes.every((r) => selectedRunes.has(r)));
+export function filterRunewords(runewords, runeCounts) {
+  const hasAny = [...runeCounts.values()].some((v) => v > 0);
+  if (!hasAny) return runewords;
+
+  return runewords.filter((rw) => {
+    const required = new Map();
+    for (const rune of rw.runes) {
+      required.set(rune, (required.get(rune) ?? 0) + 1);
+    }
+    for (const [rune, count] of required) {
+      if ((runeCounts.get(rune) ?? 0) < count) return false;
+    }
+    return true;
+  });
 }

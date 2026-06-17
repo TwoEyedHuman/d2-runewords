@@ -3,7 +3,7 @@
   import RunewordCard from './RunewordCard.svelte';
   import { filterRunewords } from './filter.js';
 
-  export let selectedRunes = new Set();
+  export let runeCounts = new Map();
 
   let runewords = [];
 
@@ -12,7 +12,7 @@
     runewords = await res.json();
   });
 
-  $: filtered = filterRunewords(runewords, selectedRunes);
+  $: filtered = filterRunewords(runewords, runeCounts);
 </script>
 
 <section class="runeword-list">

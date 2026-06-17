@@ -1,8 +1,7 @@
 <script>
   import RuneSelector from './lib/RuneSelector.svelte';
   import RunewordList from './lib/RunewordList.svelte';
-
-  let selectedRunes = new Set();
+  import { runeCounts } from './lib/store.js';
 </script>
 
 <main>
@@ -11,9 +10,9 @@
     <p class="subtitle">Diablo II: Resurrected rune word reference</p>
   </header>
   <section class="selector-section">
-    <RuneSelector bind:selectedRunes />
+    <RuneSelector />
   </section>
-  <RunewordList {selectedRunes} />
+  <RunewordList runeCounts={$runeCounts} />
 </main>
 
 <style>

@@ -1,71 +1,69 @@
 <script>
   import RuneIcon from './RuneIcon.svelte';
+  import { runeCounts } from './store.js';
 
   const ALL_RUNES = [
-    'El',
-    'Eld',
-    'Tir',
-    'Nef',
-    'Eth',
-    'Ith',
-    'Tal',
-    'Ral',
-    'Ort',
-    'Thul',
-    'Amn',
-    'Sol',
-    'Shael',
-    'Dol',
-    'Hel',
-    'Io',
-    'Lum',
-    'Ko',
-    'Fal',
-    'Lem',
-    'Pul',
-    'Um',
-    'Mal',
-    'Ist',
-    'Gul',
-    'Vex',
-    'Ohm',
-    'Lo',
-    'Sur',
-    'Ber',
-    'Jah',
-    'Cham',
-    'Zod',
+    'El', 'Eld', 'Tir', 'Nef', 'Eth', 'Ith', 'Tal', 'Ral', 'Ort', 'Thul',
+    'Amn', 'Sol', 'Shael', 'Dol', 'Hel', 'Io', 'Lum', 'Ko', 'Fal', 'Lem',
+    'Pul', 'Um', 'Mal', 'Ist', 'Gul', 'Vex', 'Ohm', 'Lo', 'Sur', 'Ber',
+    'Jah', 'Cham', 'Zod',
   ];
 
-  export let selectedRunes = new Set();
+  let pressingRune = null;
+  let pressTimer = null;
+  let longPressTriggered = false;
 
-  function toggle(rune) {
-    const next = new Set(selectedRunes);
-    if (next.has(rune)) {
-      next.delete(rune);
-    } else {
-      next.add(rune);
-    }
-    selectedRunes = next;
+  $: totalCount = [...$runeCounts.values()].reduce((a, b) => a + b, 0);
+
+  function handlePointerDown(rune, e) {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    pressingRune = rune;
+    longPressTriggered = false;
+    pressTimer = setTimeout(() => {
+      longPressTriggered = true;
+      runeCounts.reset(rune);
+      pressingRune = null;
+    }, 400);
   }
 
-  function clearAll() {
-    selectedRunes = new Set();
+  function handlePointerUp(rune) {
+    clearTimeout(pressTimer);
+    pressTimer = null;
+    if (!longPressTriggered) {
+      runeCounts.increment(rune);
+    }
+    pressingRune = null;
+    longPressTriggered = false;
+  }
+
+  function handlePointerCancel(rune) {
+    clearTimeout(pressTimer);
+    pressTimer = null;
+    if (pressingRune === rune) pressingRune = null;
+    longPressTriggered = false;
   }
 </script>
 
 <div class="rune-selector">
   <div class="selector-header">
     <h2>Select Runes</h2>
-    {#if selectedRunes.size > 0}
-      <button class="clear-btn" on:click={clearAll}>
-        Clear ({selectedRunes.size})
+    {#if totalCount > 0}
+      <button class="clear-btn" on:click={() => runeCounts.resetAll()}>
+        Clear All ({totalCount})
       </button>
     {/if}
   </div>
   <div class="rune-grid">
     {#each ALL_RUNES as rune}
-      <RuneIcon {rune} selected={selectedRunes.has(rune)} on:click={() => toggle(rune)} />
+      <RuneIcon
+        {rune}
+        count={$runeCounts.get(rune) ?? 0}
+        pressing={pressingRune === rune}
+        on:pointerdown={(e) => handlePointerDown(rune, e)}
+        on:pointerup={() => handlePointerUp(rune)}
+        on:pointerleave={() => handlePointerCancel(rune)}
+        on:pointercancel={() => handlePointerCancel(rune)}
+      />
     {/each}
   </div>
 </div>
