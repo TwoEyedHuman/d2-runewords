@@ -97,21 +97,13 @@
 
   .badge {
     position: absolute;
-    top: 3px;
-    right: 3px;
-    background: var(--d2-gold);
-    color: #1a1410;
-    font-size: 9px;
+    top: 2px;
+    right: 4px;
+    color: var(--d2-gold);
+    font-size: 10px;
     font-weight: 700;
     font-family: monospace;
     line-height: 1;
-    min-width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 3px;
   }
 
   @media (max-width: 480px) {

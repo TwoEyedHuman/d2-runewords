@@ -13,34 +13,45 @@
 7. [Secrets & Config Management](#secrets--config-management)
 8. [Definition of Done](#definition-of-done)
 
+> **Epics 1–3 are complete.** Epics 4–5 cover the next phase of enhancements.
+
 ---
 
 ## Architecture Overview
 
-```mermaid
-flowchart TD
-    DNS["d2runes.brandonlocke.xyz\n(Namecheap DNS)"]
-    FLY["Fly.io Machine\nauto start/stop · min=0"]
-    CADDY["Caddy\nserves static build"]
-    DIST["dist/ — Vite build\nindex.html · assets/*.js,css\nrunewords.json · rune SVG icons"]
-
-    DNS -->|"CNAME / A → Fly anycast"| FLY
-    FLY --> CADDY
-    CADDY --> DIST
 ```
+                    ┌─────────────────────────────┐
+                    │   d2runes.brandonlocke.xyz   │
+                    │      (Namecheap DNS)         │
+                    └───────────────┬───────────────┘
+                                    │ CNAME / A → Fly anycast
+                                    ▼
+                    ┌─────────────────────────────┐
+                    │       Fly.io Machine          │
+                    │  (auto start/stop, min=0)     │
+                    │                               │
+                    │   ┌───────────────────────┐   │
+                    │   │        Caddy          │   │
+                    │   │  (serves static build) │   │
+                    │   └───────────┬───────────┘   │
+                    │               │               │
+                    │   ┌───────────▼───────────┐   │
+                    │   │   dist/ (Vite build)   │   │
+                    │   │  - index.html          │   │
+                    │   │  - assets/*.js,css     │   │
+                    │   │  - runewords.json      │   │
+                    │   │  - rune SVG icons      │   │
+                    │   └───────────────────────┘   │
+                    └─────────────────────────────┘
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant B as Browser
-    participant App as Svelte App
-
-    B->>App: Load index.html + assets
-    B->>App: Fetch runewords.json
-    U->>B: Toggle rune icon
-    B->>App: selectedRunes updates
-    App->>App: filterRunewords(runewords, selectedRunes)
-    App-->>B: Re-render matching rune word list
+Client (browser):
+  1. Loads Svelte app + runewords.json
+  2. Restores rune inventory counts from localStorage
+  3. User clicks rune icons to increment count; long-press resets to zero
+  4. App computes effective rune counts (raw + transitive cube-up)
+  5. Filters runewords: direct match, partial cube, full cube, or hidden
+  6. Re-renders list in real time, annotating runes that require cubing
+     with their cheapest cube path (e.g. El^9 → Tir)
 ```
 
 ### Key Design Decisions
@@ -49,6 +60,8 @@ sequenceDiagram
 - **Caddy as the static server:** Automatic HTTPS support and simple config, consistent with the broader template even though TLS termination for the custom domain happens via Fly certs.
 - **Scale-to-zero on Fly.io:** `min_machines_running = 0` with `auto_stop_machines`/`auto_start_machines` keeps hosting costs near zero for a low-traffic hobby site.
 - **Extensibility mechanism:** New or updated rune words are added entirely via `runewords.json` — no code changes required. Same for new rune icons (drop an SVG into `frontend/src/assets/runes/` and reference it by rune name).
+- **Rune inventory as a count map:** `selectedRunes` is a `Map<runeName, count>` rather than a Set, enabling cube-up calculations and persisting naturally to `localStorage` as JSON.
+- **Cube-up as a pure function:** Effective rune counts are derived via a bottom-up transitive pass over the 33-rune chain, keeping the logic in a single testable `computeEffectiveCounts()` function with no side effects.
 
 ---
 
@@ -78,7 +91,9 @@ d2-runeword-calculator/
     │   │   ├── RuneIcon.svelte
     │   │   ├── RunewordList.svelte
     │   │   ├── RunewordCard.svelte
-    │   │   └── filter.js
+    │   │   ├── filter.js
+    │   │   ├── cube.js            ← transitive cube-up calculator
+    │   │   └── store.js           ← rune count map + localStorage sync
     │   └── assets/
     │       └── runes/
     │           ├── el.svg
@@ -457,9 +472,202 @@ Each story is one Claude CLI session. Keep them tight.
 
 ---
 
+### Epic 4 — Rune Count & Persistence
+
+**Epic Goal:** Replace the binary toggle model with a count-based rune inventory, persist it to `localStorage`, and update filtering to match against quantities.
+
+#### Story 4.1 — Count-Based Rune Selector
+**Context:** Builds on the completed Epic 2 app. Currently `selectedRunes` is a `Set` in `RuneSelector.svelte` and `filter.js` does a subset match. This story replaces the Set with a count map and updates the selector UX and filter logic accordingly.
+
+**Assumptions:**
+- Epic 2 is complete and all tests pass.
+- `RuneIcon.svelte` currently shows a selected/unselected visual state via a `selected` boolean prop.
+
+**Tasks:**
+- Create `frontend/src/lib/store.js` exporting a Svelte writable store `runeCounts` — a `Map<runeName, number>` initialized to all zeros. Expose helper functions: `increment(rune)`, `reset(rune)`, `resetAll()`.
+- Update `RuneIcon.svelte` to accept a `count` prop (number) instead of `selected` boolean. Render a small numeric badge overlaid on the icon when count > 0; no badge when count is 0. Style: unobtrusive, readable at small icon sizes.
+- Update `RuneSelector.svelte` to read from `runeCounts` store. Wire click → `increment(rune)`. Wire long-press (≥400ms threshold) → `reset(rune)`. Provide visual feedback on long-press hold (e.g. brief red tint or shake on release).
+- Update `frontend/src/lib/filter.js` — `filterRunewords(runewords, runeCounts)` now checks that for each required rune in the runeword, `runeCounts.get(rune) >= requiredCount` (where required count is how many times that rune appears in the runeword's `runes` array).
+- Update unit tests in `filter.js` to cover: all counts zero (returns all), exact count match, count too low (excluded), surplus count (included), Clear All restores full list.
+- Keep the Clear All button wired to `resetAll()`.
+
+**Out of Scope:**
+- `localStorage` persistence (Story 4.2).
+- Cube-up logic (Epic 5).
+
+**Acceptance Criteria:**
+- [ ] Clicking a rune icon increments its count badge; count increases on every click.
+- [ ] Long-pressing (≥400ms) a rune icon resets its count to zero.
+- [ ] Clear All resets all counts to zero and the full runeword list is shown.
+- [ ] Filter correctly shows only runewords where all required rune quantities are met by current counts.
+- [ ] `filter.js` unit tests pass.
+- [ ] `make dev` — container stays running, no build/runtime errors.
+- [ ] Browser check: set El=3, Eld=0 — confirm runewords requiring Eld are excluded; set Eld=1 — confirm they appear.
+
+---
+
+#### Story 4.2 — localStorage Persistence
+**Context:** Builds on 4.1's `store.js`. Rune counts currently reset on page refresh. This story syncs the `runeCounts` store to `localStorage` so the inventory survives across sessions.
+
+**Assumptions:**
+- `store.js` from Story 4.1 exists with `runeCounts`, `increment`, `reset`, `resetAll`.
+- No backend or external storage is needed — single global inventory in the browser.
+
+**Tasks:**
+- On `store.js` initialization, attempt to read `runeCounts` from `localStorage` key `d2runes_inventory` (JSON-serialized Map as a `[[key, value], ...]` array). Fall back to all-zero map if key is absent or parse fails.
+- Subscribe to the `runeCounts` store and write the serialized map to `localStorage` on every change.
+- Update `resetAll()` to also clear the `localStorage` key.
+- Add a brief "Saved" visual indicator (e.g. a fading toast or icon) so the user knows their inventory was persisted — optional but recommended.
+- Verify behavior across: page refresh (counts restored), Clear All (counts cleared and storage wiped), multiple tabs (last write wins — no special sync needed for v1).
+
+**Out of Scope:**
+- Per-character inventory, multi-profile support.
+- Any backend or cloud sync.
+
+**Acceptance Criteria:**
+- [ ] Rune counts survive a full page refresh (close tab, reopen URL).
+- [ ] Clear All resets all counts to zero and removes the `localStorage` key (verify via DevTools → Application → Local Storage).
+- [ ] Parse failure on corrupted `localStorage` value silently falls back to zero counts (verify by manually setting a bad value in DevTools).
+- [ ] `make dev` — container stays running, no build/runtime errors.
+- [ ] Browser check: set several rune counts, refresh, confirm counts are restored exactly.
+
+> **Gate — Epic 4 complete when:**
+> - Clicking rune icons increments their count badge; long-press resets to zero; Clear All zeroes all counts.
+> - Filter correctly matches runewords based on rune quantities (not just presence).
+> - Rune inventory persists to `localStorage` and restores on page load.
+> - All unit tests pass; `make dev` runs cleanly.
+
+---
+
+### Epic 5 — Cube-Up Runeword Matching
+
+**Epic Goal:** Compute the Horadric Cube upgrade paths from a user's raw rune inventory, classify runewords by how they can be made (direct vs. requiring cubing), and annotate the UI with the cheapest cube path for each rune slot that needs it.
+
+**Background — Cube Math:**
+The cube recipe is 3 of any rune → 1 of the next rune up (El→Eld→Tir→…→Zod, 33 steps). The effective count for each rune is computed in a single bottom-up pass:
+
+```
+effective[0] = owned[0]  (El)
+effective[i] = owned[i] + floor(effective[i-1] / 3)
+```
+
+This minimizes cubing actions by consuming the highest available rune first and only falling back to lower runes when needed. The cube path for a rune slot is derived by tracing which lower runes contributed — e.g. if `owned[Eld]=1` and `owned[El]=6`, effective[Tir] = floor((1 + floor(6/3)) / 3) = floor(3/3) = 1. The path annotation is `El^6 + Eld^1 → Tir`.
+
+**Display rules:**
+- A rune slot is **direct** if `owned[rune] >= required`. No annotation shown.
+- A rune slot is **cubed** if `owned[rune] < required` but `effective[rune] >= required`. Annotate the slot with the cheapest cube path.
+- Base rune counts in annotations are capped at display level only: if the count exceeds 99, render `"a ton"` instead of the number. The algorithm always uses exact counts.
+- A runeword is **direct** if all slots are direct.
+- A runeword is **partial cube** if some slots are direct and some are cubed.
+- A runeword is **full cube** if all slots are cubed.
+- All runewords where `effective` counts satisfy all slots are shown — there is no cutoff or hiding based on how many base runes are needed.
+
+---
+
+#### Story 5.1 — `cube.js`: Effective Count Calculator
+**Context:** Builds on 4.1's count map. This story introduces the cube-up calculation as a standalone pure module, fully tested before any UI changes.
+
+**Assumptions:**
+- `store.js` and `filter.js` from Epic 4 are complete.
+- The 33-rune order is: El, Eld, Tir, Nef, Eth, Ith, Tal, Ral, Ort, Thul, Amn, Sol, Shael, Dol, Hel, Io, Lum, Ko, Fal, Lem, Pul, Um, Mal, Ist, Gul, Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod.
+
+**Tasks:**
+- Create `frontend/src/lib/cube.js` exporting:
+  - `RUNE_ORDER` — the canonical array of 33 rune names in cube sequence order.
+  - `computeEffectiveCounts(owned: Map<string, number>): Map<string, number>` — bottom-up pass returning effective count per rune after transitive cube-up.
+  - `getCubePath(rune: string, owned: Map<string, number>): string | null` — returns a human-readable annotation string for a single rune slot (e.g. `"El^6 + Eld^1 → Tir"`) if cubing is needed, or `null` if the user already has enough raw runes. Base rune counts >99 in the output string are replaced with `"a ton"`.
+  - `classifyRuneSlot(rune: string, requiredCount: number, owned: Map<string, number>): 'direct' | 'cubed' | 'unavailable'` — `'unavailable'` only if effective count < required (i.e. truly impossible even with all cubing).
+- Write unit tests covering:
+  - Zero inventory → all effective counts zero.
+  - Exact raw count → direct, no cube path.
+  - 3 El → Eld effective count = 1; cube path = `"El^3 → Eld"`.
+  - 9 El → Tir effective count = 1; cube path = `"El^9 → Tir"`.
+  - 6 El + 1 Eld → Tir; cube path = `"El^6 + Eld^1 → Tir"` (mixed intermediate).
+  - Count >99 → `"a ton"` in path string, not in effective count.
+  - High rune (Ber) with enough El to cube all the way up.
+
+**Out of Scope:**
+- Any UI changes (Story 5.2).
+- Wiring into `filter.js` (Story 5.2).
+
+**Acceptance Criteria:**
+- [ ] All `cube.js` unit tests pass.
+- [ ] `getCubePath` returns `null` when user has enough raw runes.
+- [ ] `getCubePath` returns correct path string with intermediate runes when mixed counts contribute (e.g. 6 El + 1 Eld → Tir).
+- [ ] Base rune counts >99 render as `"a ton"` in path strings.
+- [ ] `make dev` — container stays running, no build/runtime errors.
+
+---
+
+#### Story 5.2 — Cube-Aware Filter & Runeword Classification
+**Context:** Builds on 5.1's `cube.js`. This story updates `filter.js` and `RunewordList.svelte` to use effective counts for matching and classifies each runeword for display purposes.
+
+**Assumptions:**
+- `cube.js` from Story 5.1 is complete and all tests pass.
+- `filter.js` currently filters using raw rune counts only.
+
+**Tasks:**
+- Update `filter.js` — `filterRunewords(runewords, owned)` now:
+  - Calls `computeEffectiveCounts(owned)` once.
+  - For each runeword, calls `classifyRuneSlot` for every rune slot.
+  - Includes the runeword if all slots are `'direct'` or `'cubed'` (excludes only if any slot is `'unavailable'`).
+  - Returns each runeword decorated with a classification: `'direct'`, `'partial-cube'` (some direct, some cubed), or `'full-cube'` (all cubed).
+- Update unit tests for `filter.js` to cover: all direct, partial cube, full cube, unavailable (excluded), mixed inventories.
+- Update `RunewordList.svelte` to pass the decorated runeword list to `RunewordCard`, grouping or ordering: direct runewords first, then partial-cube, then full-cube. A simple section label ("Available now" / "Available via cubing") is sufficient.
+
+**Out of Scope:**
+- Per-slot cube path annotation rendering in the card (Story 5.3).
+- Any changes to `cube.js`.
+
+**Acceptance Criteria:**
+- [ ] Updated `filter.js` unit tests pass.
+- [ ] Runewords achievable only via cubing appear in the list (below direct matches).
+- [ ] Runewords where any rune is truly unavailable even via cubing do not appear.
+- [ ] Section labels or visual grouping distinguishes direct from cube-required runewords.
+- [ ] `make dev` — container stays running, no build/runtime errors.
+- [ ] Browser check: set El=9 only → confirm runewords requiring Tir or below appear under "Available via cubing"; confirm runewords requiring runes above Tir's effective reach do not appear.
+
+---
+
+#### Story 5.3 — Cube Path Annotations in RunewordCard
+**Context:** Builds on 5.2's classified runeword list. This story renders the per-slot cube path annotations inside `RunewordCard` so the user can see exactly what cubing is needed for each rune in a runeword.
+
+**Assumptions:**
+- `RunewordCard.svelte` currently renders each required rune as a `RuneIcon` with its name.
+- `filterRunewords` from 5.2 returns slot-level classification data alongside each runeword.
+
+**Tasks:**
+- Update `filterRunewords` (or add a helper) to attach per-slot cube path strings (from `getCubePath`) to each runeword's rune list — e.g. `{ rune: 'Tir', cubePath: 'El^9 → Tir' }` or `{ rune: 'El', cubePath: null }`.
+- Update `RunewordCard.svelte` to render the `cubePath` string beneath or beside each rune icon that requires cubing. Direct slots show no annotation. Cubed slots show the path string in a muted/secondary style (e.g. smaller font, gray color).
+- Ensure the annotation is readable at both desktop and mobile card sizes.
+- Update `RunewordCard` snapshot/integration test if one exists.
+
+**Out of Scope:**
+- Any changes to the cube algorithm or filter logic.
+- Sorting or additional grouping beyond what Story 5.2 introduced.
+
+**Acceptance Criteria:**
+- [ ] Runeword cards for cube-required runewords show a cube path annotation under each rune slot that needs cubing (e.g. `El^9 → Tir`).
+- [ ] Direct rune slots show no annotation — the card is not cluttered for simple runewords.
+- [ ] Counts >99 display as `"a ton"` in the UI (e.g. `El^a ton → Jah`).
+- [ ] Mixed runewords (some direct, some cubed) annotate only the cubed slots.
+- [ ] `make dev` — container stays running, no build/runtime errors.
+- [ ] Browser check: set El=9, confirm a runeword requiring Tir shows `El^9 → Tir` under the Tir slot; set Tir=1 directly, confirm the annotation disappears.
+
+> **Gate — Epic 5 complete when:**
+> - All runewords achievable via cubing (with any number of base runes) appear in the list, grouped below direct matches.
+> - Per-slot cube path annotations are shown on cards where cubing is needed.
+> - Base rune counts >99 display as `"a ton"` in all annotations.
+> - Mixed paths (e.g. `El^6 + Eld^1 → Tir`) render correctly.
+> - All unit tests (`cube.js` and updated `filter.js`) pass.
+> - `make dev` runs cleanly end-to-end.
+
+
+---
+
 ## Secrets & Config Management
 
-This project requires **no secrets** for v1 — it is a fully static site with no API keys, databases, or third-party integrations.
+This project requires **no secrets** — it is a fully static site with no API keys, databases, or third-party integrations. Epics 4–5 introduce `localStorage` for client-side persistence, which requires no server-side secrets.
 
 - `.env.example` is committed to establish the pattern for any future needs (e.g. analytics keys).
 - `.env` is gitignored and unused in v1.
@@ -469,10 +677,12 @@ This project requires **no secrets** for v1 — it is a fully static site with n
 
 ## Definition of Done
 
-- [ ] All three epics' gates are met (see gate criteria within each epic).
+- [ ] All five epics' gates are met (see gate criteria within each epic).
 - [ ] `runewords.json` contains the complete current LoD/Ladder rune word dataset and passes validation.
-- [ ] Rune selector displays all 33 runes as custom SVG icons; selection toggles correctly.
-- [ ] Rune word list filters in real time based on selected runes (subset match); empty selection shows all rune words.
+- [ ] Rune selector displays all 33 runes as custom SVG icons; clicking increments count, long-press resets to zero.
+- [ ] Rune inventory persists to `localStorage` and restores on page load; Clear All resets both.
+- [ ] Rune word list filters in real time: direct matches shown normally; runewords requiring cube-up show per-rune cube path annotations; all achievable runewords are shown regardless of how many base runes are needed.
+- [ ] Cube-up annotations show cheapest base path (e.g. `El^6 + Eld^1 → Tir`); base rune counts >99 display as `a ton` in the UI only — the underlying algorithm always uses exact counts.
 - [ ] App is responsive on desktop and mobile.
 - [ ] App is containerized, served via Caddy, and runs via `docker compose up` locally.
 - [ ] App is deployed to Fly.io with `min_machines_running = 0` and confirmed to scale to zero on idle.
