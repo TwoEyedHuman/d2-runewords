@@ -11,12 +11,24 @@
   </div>
 
   <div class="runes">
-    {#each runeword.runeSlots ?? runeword.runes.map((rune) => ({ rune, cubePath: null })) as slot}
+    {#each runeword.runeSlots ?? runeword.runes.map( (rune) => ({ rune, cubeSources: null }), ) as slot}
       <div class="rune-slot">
-        <RuneIcon rune={slot.rune} />
-        {#if slot.cubePath}
-          <span class="cube-path">{slot.cubePath}</span>
+        {#if slot.cubeSources}
+          <div class="cube-chain" title={slot.cubePath}>
+            {#each slot.cubeSources as source, i}
+              {#if i > 0}<span class="cube-plus">+</span>{/if}
+              <RuneIcon
+                rune={source.rune}
+                count={source.count}
+                tone="cube"
+                compact
+                interactive={false}
+              />
+            {/each}
+            <span class="cube-arrow">→</span>
+          </div>
         {/if}
+        <RuneIcon rune={slot.rune} interactive={false} />
       </div>
     {/each}
   </div>
@@ -82,24 +94,27 @@
 
   .rune-slot {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 2px;
   }
 
-  .cube-path {
-    font-size: 9px;
-    font-family: monospace;
-    color: var(--d2-text-muted);
-    text-align: center;
-    max-width: 80px;
-    line-height: 1.3;
+  .cube-chain {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .cube-plus,
+  .cube-arrow {
+    font-size: 10px;
+    font-weight: 700;
+    color: #c0392b;
   }
 
   @media (max-width: 480px) {
-    .cube-path {
-      font-size: 8px;
-      max-width: 56px;
+    .cube-plus,
+    .cube-arrow {
+      font-size: 9px;
     }
   }
 

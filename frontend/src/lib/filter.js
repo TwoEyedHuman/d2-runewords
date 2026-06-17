@@ -12,7 +12,7 @@ export function filterRunewords(runewords, owned) {
     return runewords.map((rw) => ({
       ...rw,
       classification: 'direct',
-      runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null })),
+      runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null, cubeSources: null })),
     }));
   }
 
@@ -26,7 +26,11 @@ export function filterRunewords(runewords, owned) {
       const allCubed = statuses.every((s) => s === 'cubed');
       const classification = allDirect ? 'direct' : allCubed ? 'full-cube' : 'partial-cube';
 
-      const runeSlots = rw.runes.map((rune) => ({ rune, cubePath: resolved.get(rune).cubePath }));
+      const runeSlots = rw.runes.map((rune) => ({
+        rune,
+        cubePath: resolved.get(rune).cubePath,
+        cubeSources: resolved.get(rune).cubeSources,
+      }));
 
       return { ...rw, classification, runeSlots };
     })

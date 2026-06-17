@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { filterRunewords } from './filter.js';
-import { RUNE_ORDER, getCubePath } from './cube.js';
+import { RUNE_ORDER, resolveRuneword } from './cube.js';
 
 const runewords = [
   { name: 'Spirit', runes: ['Tal', 'Thul', 'Ort', 'Amn'] },
@@ -16,15 +16,20 @@ function direct(rw) {
   return {
     ...rw,
     classification: 'direct',
-    runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null })),
+    runeSlots: rw.runes.map((rune) => ({ rune, cubePath: null, cubeSources: null })),
   };
 }
 
-function withCubePaths(rw, classification, ownedMap) {
+function withResolved(rw, classification, ownedMap) {
+  const resolved = resolveRuneword(rw.runes, ownedMap);
   return {
     ...rw,
     classification,
-    runeSlots: rw.runes.map((rune) => ({ rune, cubePath: getCubePath(rune, ownedMap) })),
+    runeSlots: rw.runes.map((rune) => ({
+      rune,
+      cubePath: resolved.get(rune).cubePath,
+      cubeSources: resolved.get(rune).cubeSources,
+    })),
   };
 }
 
@@ -75,7 +80,7 @@ describe('filterRunewords', () => {
     const needed = 3 ** talIndex + 3 ** ethIndex;
     const ownedMap = owned([['El', needed]]);
     const result = filterRunewords([runewords[1]], ownedMap);
-    expect(result).toEqual([withCubePaths(runewords[1], 'full-cube', ownedMap)]);
+    expect(result).toEqual([withResolved(runewords[1], 'full-cube', ownedMap)]);
   });
 
   it('classifies partial-cube when some slots are direct and some are cubed', () => {
@@ -86,7 +91,7 @@ describe('filterRunewords', () => {
       ['El', needed],
     ]);
     const result = filterRunewords([runewords[1]], ownedMap);
-    expect(result).toEqual([withCubePaths(runewords[1], 'partial-cube', ownedMap)]);
+    expect(result).toEqual([withResolved(runewords[1], 'partial-cube', ownedMap)]);
   });
 
   it('excludes a runeword when a slot is unavailable even via cubing', () => {
@@ -126,7 +131,7 @@ describe('filterRunewords', () => {
     const result = filterRunewords(runewords, ownedMap);
     expect(result).toEqual([
       direct(runewords[0]),
-      withCubePaths(runewords[1], 'partial-cube', ownedMap),
+      withResolved(runewords[1], 'partial-cube', ownedMap),
     ]);
   });
 });

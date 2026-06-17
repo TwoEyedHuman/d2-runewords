@@ -112,8 +112,11 @@ export function classifyRuneSlot(rune, requiredCount, owned) {
  *
  * @param {string[]} runes - one entry per slot, duplicates allowed
  * @param {Map<string, number>} owned
- * @returns {Map<string, { status: 'direct' | 'cubed', cubePath: string | null }> | null}
- *   null when the recipe is not buildable even with cubing
+ * @returns {Map<string, {
+ *   status: 'direct' | 'cubed',
+ *   cubePath: string | null,
+ *   cubeSources: Array<{ rune: string, count: number }> | null,
+ * }> | null} null when the recipe is not buildable even with cubing
  */
 export function resolveRuneword(runes, owned) {
   const required = new Map();
@@ -156,8 +159,14 @@ export function resolveRuneword(runes, owned) {
       : `${RUNE_ORDER.filter((r) => contributions.has(r))
           .map((r) => `${r}^${formatCount(contributions.get(r))}`)
           .join(' + ')} → ${rune}`;
+    const cubeSources = isDirect
+      ? null
+      : RUNE_ORDER.filter((r) => r !== rune && contributions.has(r)).map((r) => ({
+          rune: r,
+          count: contributions.get(r),
+        }));
 
-    result.set(rune, { status: isDirect ? 'direct' : 'cubed', cubePath });
+    result.set(rune, { status: isDirect ? 'direct' : 'cubed', cubePath, cubeSources });
   }
 
   return result;

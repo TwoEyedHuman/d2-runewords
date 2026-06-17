@@ -2,12 +2,18 @@
   export let rune;
   export let count = 0;
   export let pressing = false;
+  export let tone = 'gold';
+  export let compact = false;
+  export let interactive = true;
 </script>
 
-<button
+<svelte:element
+  this={interactive ? 'button' : 'div'}
   class="rune-icon"
   class:active={count > 0}
   class:pressing
+  class:cube={tone === 'cube'}
+  class:compact
   on:click
   on:pointerdown
   on:pointerup
@@ -21,7 +27,7 @@
   {/if}
   <img src={`/runes/${rune.toLowerCase()}.svg`} alt="" aria-hidden="true" />
   <span class="rune-name">{rune}</span>
-</button>
+</svelte:element>
 
 <style>
   .rune-icon {
@@ -79,6 +85,48 @@
   .rune-icon.pressing img {
     filter: drop-shadow(0 0 5px rgba(192, 57, 43, 0.8));
     opacity: 0.9;
+  }
+
+  .rune-icon:not(button) {
+    cursor: default;
+  }
+
+  .rune-icon.cube {
+    border-color: #c0392b;
+    background: rgba(192, 57, 43, 0.1);
+  }
+
+  .rune-icon.cube img {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(192, 57, 43, 0.7));
+  }
+
+  .rune-icon.cube .rune-name {
+    color: #d9665a;
+  }
+
+  .rune-icon.cube .badge {
+    color: #e0594a;
+  }
+
+  .rune-icon.compact {
+    padding: 4px 3px;
+    gap: 2px;
+  }
+
+  .rune-icon.compact img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .rune-icon.compact .rune-name {
+    font-size: 7px;
+  }
+
+  .rune-icon.compact .badge {
+    font-size: 8px;
+    top: 0;
+    right: 1px;
   }
 
   .rune-name {
